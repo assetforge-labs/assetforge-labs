@@ -108,11 +108,19 @@ export default function FeedbackSection() {
     setList(next)
     try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch { /* ignore */ }
     try {
-      await fetch('https://formspree.io/f/xyzgpqrn', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ suggestion: text, category: cat, email: email || 'Anonymous', mood }),
-      })
+    await fetch('https://api.web3forms.com/submit', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    access_key: 'a313b421-6a0e-43b5-9878-15adc0bd0281',
+    subject: 'New Suggestion — AssetForge Labs',
+    from_name: 'AssetForge Labs Feedback',
+    suggestion: text,
+    category: cat,
+    user_email: email || 'Anonymous',
+    mood: mood || 'Not specified',
+  }),
+})
     } catch { /* ignore */ }
     setSending(false)
     setSent(true)
