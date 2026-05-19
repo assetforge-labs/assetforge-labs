@@ -7,7 +7,7 @@ import DragDropZone from './components/DragDropZone'
 import MetadataForm from './components/MetadataForm'
 import PricingSection from './components/PricingSection'
 import ProGate from './components/ProGate'
-import AIWriter from './components/AIWriter'
+import SmartAnalyzer from './components/SmartAnalyzer'
 import MarketplacePreviewPanel from './components/MarketplacePreviewPanel'
 import ListingScore from './components/ListingScore'
 
@@ -143,10 +143,10 @@ function App() {
           hasAIContent={aiContent.length > 50}
         />
 
-        {/* AI Writer — UNIQUE FEATURE 1 */}
-        <AIWriter
+        {/* Smart Market Analyzer — UNIQUE FEATURE 1 */}
+        <SmartAnalyzer
+          files={ingestion.files}
           productName={productName}
-          onGenerated={(text) => setAiContent(text)}
         />
 
         {/* SEO Metadata Form */}
