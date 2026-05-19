@@ -16,16 +16,14 @@ function App() {
   const zipper    = useZipGenerator()
   const [productName,  setProductName]  = useState('')
   const [metadata,     setMetadata]     = useState('')
-  const [aiContent,    setAiContent]    = useState('')
   const [isPro]                         = useState(false)
   const [showPricing,  setShowPricing]  = useState(false)
 
-  const fullDescription = metadata + '\n\n' + aiContent
+  const fullDescription = metadata
 
   async function handleGenerate() {
-    const combined = [metadata, aiContent].filter(Boolean).join('\n\n---\n\n')
-    await zipper.generate(ingestion.files, productName, combined)
-  }
+  await zipper.generate(ingestion.files, productName, metadata)
+}
 
   function scrollToPricing() {
     setShowPricing(true)
@@ -76,13 +74,13 @@ function App() {
           <span style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6,#ec4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>All in Your Browser.</span>
         </h1>
         <p style={{ color: '#94a3b8', fontSize: '18px', maxWidth: '560px', margin: '0 auto 32px', lineHeight: '1.7' }}>
-          The only tool that packages your files, writes your Etsy listing with AI, shows you a live marketplace preview, and scores your SEO — all without uploading anything.
+          The only tool that packages your files, analyzes your market instantly, shows a live marketplace preview, and scores your SEO — all 100% free, no uploads, no servers.
         </p>
 
         {/* Unique feature badges */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap', marginBottom: '32px' }}>
           {[
-            { label: '🤖 AI Listing Writer', color: '#6366f1' },
+            { label: '🧠 Smart Analyzer', color: '#10b981' },
             { label: '👁️ Live Preview', color: '#8b5cf6' },
             { label: '📊 SEO Score', color: '#ec4899' },
             { label: '🔒 100% Private', color: '#10b981' },
@@ -140,7 +138,7 @@ function App() {
           description={fullDescription}
           fileCount={ingestion.files.length}
           hasMetadata={metadata.length > 50}
-          hasAIContent={aiContent.length > 50}
+          hasAIContent={false}
         />
 
         {/* Smart Market Analyzer — UNIQUE FEATURE 1 */}
@@ -182,8 +180,7 @@ function App() {
             }}
           >
             ⚡ Generate Complete Package ({ingestion.files.length} file{ingestion.files.length > 1 ? 's' : ''})
-            {aiContent && ' + AI Listing'}
-            {metadata && ' + SEO'}
+          {metadata && ' + SEO'}
           </button>
         )}
 
@@ -211,7 +208,7 @@ function App() {
             </p>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
               <button
-                onClick={() => { zipper.reset(); ingestion.clearAll(); setProductName(''); setMetadata(''); setAiContent('') }}
+                onClick={() => { zipper.reset(); ingestion.clearAll(); setProductName(''); setMetadata('') }}
                 style={{ padding: '10px 20px', background: 'none', border: '1px solid rgba(16,185,129,0.4)', borderRadius: '8px', color: '#10b981', fontSize: '14px', cursor: 'pointer', fontWeight: '600' }}
               >
                 Package another →
@@ -235,6 +232,30 @@ function App() {
         )}
       </section>
 
+{/* How It Works */}
+<section style={{ padding: '60px 32px', maxWidth: '760px', margin: '0 auto' }}>
+  <h2 style={{ fontSize: '28px', fontWeight: 800, textAlign: 'center', marginBottom: '8px' }}>
+    Ready in 3 simple steps
+  </h2>
+  <p style={{ color: '#94a3b8', textAlign: 'center', fontSize: '15px', marginBottom: '40px' }}>
+    From files to market-ready package in under 60 seconds
+  </p>
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+    {[
+      { step: '01', icon: '📁', title: 'Drop Your Files', desc: 'Drag and drop any digital files. Images go to Preview folder, everything else to Source Files automatically.' },
+      { step: '02', icon: '🧠', title: 'Get Market Intel', desc: 'SmartAnalyzer instantly detects your asset type and shows best platform, price, keywords and revenue estimate.' },
+      { step: '03', icon: '⚡', title: 'Download Package', desc: 'One click generates a structured ZIP with SEO metadata, README and marketplace listing — ready to upload.' },
+    ].map((s) => (
+      <div key={s.step} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '16px', padding: '24px', position: 'relative' }}>
+        <span style={{ position: 'absolute', top: '16px', right: '16px', fontSize: '11px', fontWeight: 800, color: 'rgba(255,255,255,0.1)', letterSpacing: '0.05em' }}>{s.step}</span>
+        <div style={{ fontSize: '32px', marginBottom: '12px' }}>{s.icon}</div>
+        <h3 style={{ fontWeight: 700, fontSize: '15px', marginBottom: '8px', color: '#f8fafc' }}>{s.title}</h3>
+        <p style={{ color: '#94a3b8', fontSize: '13px', lineHeight: '1.6' }}>{s.desc}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
       {/* Features */}
       <section id="features" style={{ padding: '80px 32px', maxWidth: '960px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
@@ -245,7 +266,7 @@ function App() {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
           {[
-            { icon: '🤖', title: 'AI Listing Writer', desc: 'Claude AI writes your complete Etsy listing — title, description, 13 tags, price suggestion. Nobody else has this.', badge: 'EXCLUSIVE' },
+            { icon: '🧠', title: 'Smart Market Analyzer', desc: 'Instantly detects your asset type and shows best platform, price range, revenue estimate and top 2026 keywords. World first.', badge: 'WORLD FIRST' },
             { icon: '👁️', title: 'Live Marketplace Preview', desc: 'See pixel-perfect previews of your listing on Etsy and Gumroad before publishing. World first.', badge: 'WORLD FIRST' },
             { icon: '📊', title: 'Listing Health Score', desc: 'Real-time SEO scoring system tells you exactly what to fix before you list. Like Grammarly for Etsy.', badge: 'UNIQUE' },
             { icon: '📦', title: 'Smart ZIP Packaging', desc: 'Auto-organised folders for Source Files, Previews and Metadata. AI listing included inside.', badge: null },

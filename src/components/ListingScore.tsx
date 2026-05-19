@@ -47,11 +47,11 @@ export default function ListingScore({ productName, description, fileCount, hasM
       points: 20,
     },
     {
-      label: 'AI listing written',
-      passed: hasAIContent,
-      tip: 'Use the AI Writer to generate a full listing',
-      points: 15,
-    },
+  label: 'Market analysis done',
+  passed: hasAIContent,
+  tip: 'Type a product name to get Smart Market Analysis',
+  points: 15,
+},
     {
       label: 'Description has detail',
       passed: description.length > 100,
