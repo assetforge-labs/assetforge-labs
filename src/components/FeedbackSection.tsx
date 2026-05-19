@@ -112,7 +112,7 @@ export default function FeedbackSection() {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
-    access_key: 'a313b421-6a0e-43b5-9878-15adc0bd0281',
+    access_key: '0cd76dea-5efc-4afb-b4b2-5bccaca5d4ec',
     subject: 'New Suggestion — AssetForge Labs',
     from_name: 'AssetForge Labs Feedback',
     suggestion: text,
