@@ -417,7 +417,7 @@ function App() {
         <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '24px' }}>
           {/* Official X Logo */}
           <a 
-            href="YOUR_X_PROFILE_URL_HERE" 
+            href="https://x.com/AssetForgeLabs" 
             target="_blank" 
             rel="noopener noreferrer" 
             style={{ color: '#64748b', transition: 'color 0.2s' }} 
@@ -431,7 +431,7 @@ function App() {
 
           {/* Official LinkedIn Logo */}
           <a 
-            href="YOUR_LINKEDIN_PROFILE_URL_HERE" 
+            href="https://www.linkedin.com/in/assetforge-labs-914536410" 
             target="_blank" 
             rel="noopener noreferrer" 
             style={{ color: '#64748b', transition: 'color 0.2s' }} 
