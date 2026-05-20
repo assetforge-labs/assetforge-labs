@@ -67,7 +67,7 @@ function App() {
       <section className="fade-in" style={{ textAlign: 'center', padding: '72px 24px 48px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: '#6366f1', marginBottom: '24px' }}>
           <span className="pulse-dot" style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#6366f1', display: 'inline-block' }} />
-          World's first AI-powered digital asset packager
+          World's first Smart Market Analyzer for digital creators
         </div>
         <h1 style={{ fontSize: 'clamp(32px, 6vw, 64px)', fontWeight: '800', lineHeight: '1.1', marginBottom: '20px' }}>
           Package. Optimize. Sell.<br />
@@ -204,7 +204,7 @@ function App() {
             <div style={{ fontSize: '48px', marginBottom: '8px' }}>🎉</div>
             <p style={{ fontWeight: '800', fontSize: '20px', color: '#10b981', marginBottom: '4px' }}>Package Downloaded!</p>
             <p style={{ fontSize: '13px', color: '#94a3b8', marginBottom: '20px' }}>
-              Check your Downloads folder — AI listing + SEO description + README all inside!
+              Check your Downloads folder — SEO description + README all inside!
             </p>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
               <button
@@ -269,7 +269,7 @@ function App() {
             { icon: '🧠', title: 'Smart Market Analyzer', desc: 'Instantly detects your asset type and shows best platform, price range, revenue estimate and top 2026 keywords. World first.', badge: 'WORLD FIRST' },
             { icon: '👁️', title: 'Live Marketplace Preview', desc: 'See pixel-perfect previews of your listing on Etsy and Gumroad before publishing. World first.', badge: 'WORLD FIRST' },
             { icon: '📊', title: 'Listing Health Score', desc: 'Real-time SEO scoring system tells you exactly what to fix before you list. Like Grammarly for Etsy.', badge: 'UNIQUE' },
-            { icon: '📦', title: 'Smart ZIP Packaging', desc: 'Auto-organised folders for Source Files, Previews and Metadata. AI listing included inside.', badge: null },
+            { icon: '📦', title: 'Smart ZIP Packaging', desc: 'Auto-organised folders for Source Files, Previews and Metadata. SEO description included inside.', badge: null },
             { icon: '🔒', title: '100% Browser Private', desc: 'Files never leave your device. No server. No upload. No privacy risk. Impossible to hack.', badge: null },
             { icon: '⚡', title: 'Instant Download', desc: 'Generate and download your complete ready-to-list package in seconds. No waiting.', badge: null },
           ].map((card) => (
