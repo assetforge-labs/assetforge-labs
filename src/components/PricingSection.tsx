@@ -142,7 +142,7 @@ export default function PricingSection() {
                 {plan.description}
               </p>
 
-              {/* Dynamic Call-To-Action Element Injection */}
+              {/* Dynamic Call-To-Action Element Injection with Form Containers */}
               <div style={{ marginBottom: '24px', minHeight: '46px' }}>
                 {plan.name === 'Free' && (
                   <button
@@ -165,7 +165,7 @@ export default function PricingSection() {
                 )}
 
                 {plan.name === 'Pro' && (
-                  <div 
+                  <form 
                     ref={(el) => {
                       if (el && el.children.length === 0) {
                         const script = document.createElement('script');
@@ -179,7 +179,7 @@ export default function PricingSection() {
                 )}
 
                 {plan.name === 'Lifetime' && (
-                  <div 
+                  <form 
                     ref={(el) => {
                       if (el && el.children.length === 0) {
                         const script = document.createElement('script');
