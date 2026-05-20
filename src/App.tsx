@@ -297,9 +297,9 @@ function App() {
         <div style={{ fontWeight: '800', fontSize: '18px', marginBottom: '8px' }}>AssetForge Labs</div>
         <p style={{ fontSize: '13px', color: '#64748b', marginBottom: '20px' }}>The world's most advanced digital asset packager</p>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', fontSize: '13px', color: '#64748b', flexWrap: 'wrap' }}>
-          <a href="#" style={{ color: '#64748b', textDecoration: 'none' }}>Privacy Policy</a>
-          <a href="#" style={{ color: '#64748b', textDecoration: 'none' }}>Terms of Service</a>
-          <a href="#" style={{ color: '#64748b', textDecoration: 'none' }}>Contact</a>
+          <a href="/privacy.html" style={{ color: '#64748b', textDecoration: 'none' }}>Privacy Policy</a>
+<a href="/terms.html" style={{ color: '#64748b', textDecoration: 'none' }}>Terms of Service</a>
+<a href="mailto:assetforgelabs@gmail.com" style={{ color: '#64748b', textDecoration: 'none' }}>Contact</a>
         </div>
         <p style={{ fontSize: '12px', color: '#374151', marginTop: '20px' }}>© 2026 AssetForge Labs. All rights reserved.</p>
       </footer>

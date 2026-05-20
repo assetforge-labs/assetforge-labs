@@ -132,25 +132,77 @@ export default function PricingSection() {
             <p style={{ fontSize: '13px', color: '#64748b', marginBottom: '24px' }}>{plan.description}</p>
 
             {/* CTA Button */}
-            <button
-              style={{
-                width: '100%',
-                padding: '12px',
-                borderRadius: '10px',
-                border: plan.highlighted ? 'none' : '1px solid rgba(255,255,255,0.15)',
-                background: plan.highlighted ? '#6366f1' : 'transparent',
-                color: 'white',
-                fontSize: '14px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                marginBottom: '24px',
-                boxShadow: plan.highlighted ? '0 0 20px rgba(99,102,241,0.3)' : 'none',
-                transition: 'all 0.2s ease',
-              }}
-            >
-              {plan.cta}
-            </button>
+{plan.name === 'Free' && (
+  <button
+    style={{
+      width: '100%',
+      padding: '12px',
+      borderRadius: '10px',
+      border: '1px solid rgba(255,255,255,0.15)',
+      background: 'transparent',
+      color: 'white',
+      fontSize: '14px',
+      fontWeight: '600',
+      cursor: 'pointer',
+      marginBottom: '24px',
+    }}
+    onClick={() => window.location.href = '/signup'}
+  >
+    {plan.cta}
+  </button>
+)}
 
+{plan.name === 'Pro' && (
+  <a
+    href="https://rzp.io/rzp/vUnbWlh8"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: 'block',
+      width: '100%',
+      padding: '12px',
+      borderRadius: '10px',
+      border: 'none',
+      background: '#6366f1',
+      color: 'white',
+      fontSize: '14px',
+      fontWeight: 600,
+      cursor: 'pointer',
+      marginBottom: '24px',
+      boxShadow: '0 0 20px rgba(99,102,241,0.3)',
+      textAlign: 'center' as const,
+      textDecoration: 'none',
+    }}
+  >
+    Upgrade to Pro — ₹1,250 / month
+  </a>
+)}
+
+{plan.name === 'Lifetime' && (
+  <a
+    href="https://rzp.io/rzp/X4uYDAYh"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: 'block',
+      width: '100%',
+      padding: '12px',
+      borderRadius: '10px',
+      border: '1px solid rgba(255,255,255,0.15)',
+      background: 'transparent',
+      color: 'white',
+      fontSize: '14px',
+      fontWeight: 600,
+      cursor: 'pointer',
+      marginBottom: '24px',
+      textAlign: 'center' as const,
+      textDecoration: 'none',
+    }}
+  >
+    Get Lifetime — ₹8,250
+  </a>
+)}
+            
             {/* Features */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {plan.features.map((feature) => (
