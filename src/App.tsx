@@ -76,10 +76,23 @@ function App() {
   return (
     <div style={{ background: '#0a0a0f', color: '#f8fafc', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
 
-      {/* Sticky Navbar */}
-      <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 32px', borderBottom: '1px solid rgba(255,255,255,0.05)', position: 'sticky', top: 0, background: 'rgba(10,10,15,0.92)', backdropFilter: 'blur(12px)', zIndex: 100 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
+      {/* Sticky Navbar - Mobile Optimized Layout Updates */}
+      <nav style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'space-between', 
+        padding: '12px 16px', 
+        gap: '12px',
+        flexWrap: 'wrap',
+        borderBottom: '1px solid rgba(255,255,255,0.05)', 
+        position: 'sticky', 
+        top: 0, 
+        background: 'rgba(10,10,15,0.95)', 
+        backdropFilter: 'blur(12px)', 
+        zIndex: 100 
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+          <svg width="30" height="30" viewBox="0 0 36 36" fill="none">
             <defs>
               <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#818cf8"/>
@@ -89,16 +102,17 @@ function App() {
             <rect width="36" height="36" rx="9" fill="url(#lg1)"/>
             <path d="M20 6L10 20h8l-2 10 12-16h-8l2-8z" fill="white" opacity="0.95"/>
           </svg>
-          <span style={{ fontWeight: '800', fontSize: '17px', background: 'linear-gradient(135deg,#818cf8,#a855f7)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          <span style={{ fontWeight: '800', fontSize: '16px', background: 'linear-gradient(135deg,#818cf8,#a855f7)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', whiteSpace: 'nowrap' }}>
             AssetForge Labs
           </span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <a href="#features" style={{ fontSize: '14px', color: '#94a3b8', textDecoration: 'none' }}>Features</a>
-          <a href="#pricing" onClick={(e) => { e.preventDefault(); scrollToPricing() }} style={{ fontSize: '14px', color: '#94a3b8', textDecoration: 'none', cursor: 'pointer' }}>Pricing</a>
+        
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'nowrap' }}>
+          <a href="#features" style={{ fontSize: '13px', color: '#94a3b8', textDecoration: 'none', whiteSpace: 'nowrap' }}>Features</a>
+          <a href="#pricing" onClick={(e) => { e.preventDefault(); scrollToPricing() }} style={{ fontSize: '13px', color: '#94a3b8', textDecoration: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>Pricing</a>
           {isPro
-            ? <span style={{ fontSize: '13px', background: 'rgba(99,102,241,0.2)', border: '1px solid rgba(99,102,241,0.4)', color: '#a5b4fc', padding: '4px 12px', borderRadius: '99px' }}>⚡ Premium Active</span>
-            : <button onClick={scrollToPricing} style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: 'white', fontSize: '14px', padding: '8px 18px', borderRadius: '8px', border: 'none', cursor: 'pointer', fontWeight: '600' }}>Get Started Free</button>
+            ? <span style={{ fontSize: '12px', background: 'rgba(99,102,241,0.2)', border: '1px solid rgba(99,102,241,0.4)', color: '#a5b4fc', padding: '4px 10px', borderRadius: '99px', whiteSpace: 'nowrap' }}>⚡ Pro</span>
+            : <button onClick={scrollToPricing} style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: 'white', fontSize: '12px', padding: '6px 12px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontWeight: '600', whiteSpace: 'nowrap' }}>Get Started</button>
           }
         </div>
       </nav>
