@@ -12,7 +12,7 @@ interface Plan {
 const plans: Plan[] = [
   {
     name: 'Free',
-    price: '$0',
+    price: '₹0',
     period: 'forever',
     description: 'Perfect for trying AssetForge',
     features: [
@@ -30,7 +30,7 @@ const plans: Plan[] = [
   },
   {
     name: 'Pro',
-    price: '$15',
+    price: '₹1,250',
     period: 'per month',
     description: 'For serious digital creators',
     features: [
@@ -49,7 +49,7 @@ const plans: Plan[] = [
   },
   {
     name: 'Lifetime',
-    price: '$99',
+    price: '₹8,250',
     period: 'one-time',
     description: 'Pay once, use forever',
     features: [
@@ -59,7 +59,6 @@ const plans: Plan[] = [
       '✅ Priority support',
       '✅ Early beta access',
       '✅ Founding member badge',
-      '✅ Private Discord access',
       '✅ Commercial license',
     ],
     cta: 'Get Lifetime Access',
@@ -74,18 +73,29 @@ export default function PricingSection() {
 
       {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: '#6366f1', marginBottom: '16px' }}>
-          💰 Simple, transparent pricing
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '8px',
+          background: 'rgba(99,102,241,0.1)',
+          border: '1px solid rgba(99,102,241,0.2)',
+          borderRadius: '99px',
+          padding: '6px 16px',
+          fontSize: '13px',
+          color: '#6366f1',
+          marginBottom: '16px'
+        }}>
+          💰 Simple, transparent pricing (INR)
         </div>
         <h2 style={{ fontSize: '36px', fontWeight: '700', marginBottom: '12px' }}>
           Start free. Scale when ready.
         </h2>
         <p style={{ color: '#94a3b8', fontSize: '16px' }}>
-          No hidden fees. Cancel anytime. Your files always stay on your device.
+          Prices shown in INR. International cards supported.
         </p>
       </div>
 
-      {/* Plans Grid */}
+      {/* Plans */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
         {plans.map((plan) => (
           <div
@@ -96,10 +106,8 @@ export default function PricingSection() {
               borderRadius: '20px',
               padding: '28px 24px',
               position: 'relative',
-              transition: 'transform 0.2s ease',
             }}
           >
-            {/* Badge */}
             {plan.badge && (
               <div style={{
                 position: 'absolute',
@@ -112,124 +120,93 @@ export default function PricingSection() {
                 fontWeight: '600',
                 padding: '4px 14px',
                 borderRadius: '99px',
-                whiteSpace: 'nowrap',
               }}>
                 {plan.badge}
               </div>
             )}
 
-            {/* Plan Name */}
-            <p style={{ fontSize: '14px', fontWeight: '600', color: '#94a3b8', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <p style={{ fontSize: '14px', fontWeight: '600', color: '#94a3b8', marginBottom: '8px' }}>
               {plan.name}
             </p>
 
-            {/* Price */}
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '4px' }}>
-              <span style={{ fontSize: '42px', fontWeight: '700', color: '#f8fafc' }}>{plan.price}</span>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '6px' }}>
+              <span style={{ fontSize: '42px', fontWeight: '700' }}>{plan.price}</span>
               <span style={{ fontSize: '14px', color: '#94a3b8' }}>/{plan.period}</span>
             </div>
 
-            <p style={{ fontSize: '13px', color: '#64748b', marginBottom: '24px' }}>{plan.description}</p>
+            <p style={{ fontSize: '13px', color: '#64748b', marginBottom: '24px' }}>
+              {plan.description}
+            </p>
 
-            {/* CTA Button */}
-{plan.name === 'Free' && (
-  <button
-    style={{
-      width: '100%',
-      padding: '12px',
-      borderRadius: '10px',
-      border: '1px solid rgba(255,255,255,0.15)',
-      background: 'transparent',
-      color: 'white',
-      fontSize: '14px',
-      fontWeight: '600',
-      cursor: 'pointer',
-      marginBottom: '24px',
-    }}
-    onClick={() => window.location.href = '/signup'}
-  >
-    {plan.cta}
-  </button>
-)}
+            {/* CTA */}
+            {plan.name === 'Free' && (
+              <button
+                onClick={() => window.location.href = '/signup'}
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  borderRadius: '10px',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  background: 'transparent',
+                  color: 'white',
+                  fontWeight: '600',
+                  marginBottom: '24px',
+                }}
+              >
+                {plan.cta}
+              </button>
+            )}
 
-{plan.name === 'Pro' && (
-  <a
-    href="https://rzp.io/rzp/vUnbWlh8"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{
-      display: 'block',
-      width: '100%',
-      padding: '12px',
-      borderRadius: '10px',
-      border: 'none',
-      background: '#6366f1',
-      color: 'white',
-      fontSize: '14px',
-      fontWeight: 600,
-      cursor: 'pointer',
-      marginBottom: '24px',
-      boxShadow: '0 0 20px rgba(99,102,241,0.3)',
-      textAlign: 'center' as const,
-      textDecoration: 'none',
-    }}
-  >
-    Upgrade to Pro — ₹1,250 / month
-  </a>
-)}
+            {plan.name === 'Pro' && (
+              <a
+                href="https://rzp.io/rzp/vUnbWlh8"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px',
+                  borderRadius: '10px',
+                  background: '#6366f1',
+                  color: 'white',
+                  fontWeight: 600,
+                  textAlign: 'center',
+                  marginBottom: '24px',
+                  textDecoration: 'none',
+                }}
+              >
+                Upgrade to Pro — ₹1,250 / month
+              </a>
+            )}
 
-{plan.name === 'Lifetime' && (
-  <a
-    href="https://rzp.io/rzp/X4uYDAYh"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{
-      display: 'block',
-      width: '100%',
-      padding: '12px',
-      borderRadius: '10px',
-      border: '1px solid rgba(255,255,255,0.15)',
-      background: 'transparent',
-      color: 'white',
-      fontSize: '14px',
-      fontWeight: 600,
-      cursor: 'pointer',
-      marginBottom: '24px',
-      textAlign: 'center' as const,
-      textDecoration: 'none',
-    }}
-  >
-    Get Lifetime — ₹8,250
-  </a>
-)}
-            
+            {plan.name === 'Lifetime' && (
+              <a
+                href="https://rzp.io/rzp/X4uYDAYh"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '12px',
+                  borderRadius: '10px',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  color: 'white',
+                  fontWeight: 600,
+                  textAlign: 'center',
+                  marginBottom: '24px',
+                  textDecoration: 'none',
+                }}
+              >
+                Get Lifetime — ₹8,250
+              </a>
+            )}
+
             {/* Features */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {plan.features.map((feature) => (
-                <p key={feature} style={{
-                  fontSize: '13px',
-                  color: feature.startsWith('❌') ? '#475569' : '#cbd5e1',
-                  lineHeight: '1.4',
-                }}>
-                  {feature}
-                </p>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Trust badges */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '32px', marginTop: '48px', flexWrap: 'wrap' }}>
-        {[
-          { icon: '🔒', text: 'No card required for Free' },
-          { icon: '⚡', text: 'Instant access' },
-          { icon: '🔄', text: 'Cancel anytime' },
-          { icon: '🌍', text: 'AssetForge Labs — trusted worldwide' },
-        ].map((badge) => (
-          <div key={badge.text} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#64748b' }}>
-            <span>{badge.icon}</span>
-            <span>{badge.text}</span>
+            {plan.features.map((f) => (
+              <p key={f} style={{ fontSize: '13px', color: f.startsWith('❌') ? '#475569' : '#cbd5e1' }}>
+                {f}
+              </p>
+            ))}
           </div>
         ))}
       </div>
