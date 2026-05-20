@@ -41,7 +41,7 @@ export default function ProGate({ feature, onUpgrade }: Props) {
           whiteSpace: 'nowrap',
         }}
       >
-        ⚡ Upgrade to Pro — $15/mo
+        ⚡ Upgrade to Pro — ₹1250/mo
       </button>
     </div>
   )
