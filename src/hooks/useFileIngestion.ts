@@ -43,9 +43,11 @@ export function useFileIngestion() {
       return
     }
 
-    // Check 50MB free limit
+    // Check free limit (Bypassed instantly if user is Pro)
     const incoming = arr.reduce((acc, f) => acc + f.size, 0)
-    if (totalSize + incoming > FREE_LIMIT_BYTES) {
+    const isUserPro = localStorage.getItem('afl_pro_activated') === 'true'
+    
+    if (!isUserPro && (totalSize + incoming > FREE_LIMIT_BYTES)) {
       setError('Free plan limit is 50MB. Upgrade to Pro for unlimited size.')
       return
     }

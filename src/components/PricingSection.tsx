@@ -14,11 +14,11 @@ const plans: Plan[] = [
     name: 'Free',
     price: '₹0',
     period: 'forever',
-    description: 'Perfect for trying AssetForge',
+    description: 'Perfect for trying AssetForge Labs',
     features: [
       '✅ Up to 50MB per package',
       '✅ Basic ZIP packaging',
-      '✅ 4 SEO templates',
+      '✅ 13 Platform templates',
       '✅ README auto-generated',
       '❌ Batch processing',
       '❌ Unlimited file size',
@@ -35,7 +35,7 @@ const plans: Plan[] = [
     description: 'For serious digital creators',
     features: [
       '✅ Unlimited file size',
-      '✅ All 8 SEO templates',
+      '✅ All 13 SEO templates',
       '✅ Premium 2026 keywords',
       '✅ Batch processing',
       '✅ White-label branding',
@@ -95,7 +95,7 @@ export default function PricingSection() {
         </p>
       </div>
 
-      {/* Plans */}
+      {/* Plans Matrix */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
         {plans.map((plan) => (
           <div
@@ -106,107 +106,103 @@ export default function PricingSection() {
               borderRadius: '20px',
               padding: '28px 24px',
               position: 'relative',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between'
             }}
           >
-            {plan.badge && (
-              <div style={{
-                position: 'absolute',
-                top: '-12px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                background: plan.highlighted ? '#6366f1' : '#8b5cf6',
-                color: 'white',
-                fontSize: '11px',
-                fontWeight: '600',
-                padding: '4px 14px',
-                borderRadius: '99px',
-              }}>
-                {plan.badge}
+            <div>
+              {plan.badge && (
+                <div style={{
+                  position: 'absolute',
+                  top: '-12px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  background: plan.highlighted ? '#6366f1' : '#8b5cf6',
+                  color: 'white',
+                  fontSize: '11px',
+                  fontWeight: '600',
+                  padding: '4px 14px',
+                  borderRadius: '99px',
+                }}>
+                  {plan.badge}
+                </div>
+              )}
+
+              <p style={{ fontSize: '14px', fontWeight: '600', color: '#94a3b8', marginBottom: '8px' }}>
+                {plan.name}
+              </p>
+
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '6px' }}>
+                <span style={{ fontSize: '42px', fontWeight: '700' }}>{plan.price}</span>
+                <span style={{ fontSize: '14px', color: '#94a3b8' }}>/{plan.period}</span>
               </div>
-            )}
 
-            <p style={{ fontSize: '14px', fontWeight: '600', color: '#94a3b8', marginBottom: '8px' }}>
-              {plan.name}
-            </p>
+              <p style={{ fontSize: '13px', color: '#64748b', marginBottom: '24px' }}>
+                {plan.description}
+              </p>
 
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '6px' }}>
-              <span style={{ fontSize: '42px', fontWeight: '700' }}>{plan.price}</span>
-              <span style={{ fontSize: '14px', color: '#94a3b8' }}>/{plan.period}</span>
+              {/* Dynamic Call-To-Action Element Injection */}
+              <div style={{ marginBottom: '24px', minHeight: '46px' }}>
+                {plan.name === 'Free' && (
+                  <button
+                    onClick={() => {
+                      document.getElementById('root')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    style={{
+                      width: '100%',
+                      padding: '12px',
+                      borderRadius: '10px',
+                      border: '1px solid rgba(255,255,255,0.15)',
+                      background: 'transparent',
+                      color: 'white',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    {plan.cta}
+                  </button>
+                )}
+
+                {plan.name === 'Pro' && (
+                  <div 
+                    ref={(el) => {
+                      if (el && el.children.length === 0) {
+                        const script = document.createElement('script');
+                        script.src = 'https://checkout.razorpay.com/v1/payment-button.js';
+                        script.setAttribute('data-payment_button_id', 'pl_SrdzcfF70rngVM');
+                        script.async = true;
+                        el.appendChild(script);
+                      }
+                    }}
+                  />
+                )}
+
+                {plan.name === 'Lifetime' && (
+                  <div 
+                    ref={(el) => {
+                      if (el && el.children.length === 0) {
+                        const script = document.createElement('script');
+                        script.src = 'https://checkout.razorpay.com/v1/payment-button.js';
+                        script.setAttribute('data-payment_button_id', 'pl_SreBlUiTbV7Tvs');
+                        script.async = true;
+                        el.appendChild(script);
+                      }
+                    }}
+                  />
+                )}
+              </div>
             </div>
 
-            <p style={{ fontSize: '13px', color: '#64748b', marginBottom: '24px' }}>
-              {plan.description}
-            </p>
+            {/* Plan Feature Metrics */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {plan.features.map((f) => (
+                <p key={f} style={{ fontSize: '13px', margin: 0, color: f.startsWith('❌') ? '#475569' : '#cbd5e1' }}>
+                  {f}
+                </p>
+              ))}
+            </div>
 
-            {/* CTA */}
-            {plan.name === 'Free' && (
-              <button
-                onClick={() => window.location.href = '/signup'}
-                style={{
-                  width: '100%',
-                  padding: '12px',
-                  borderRadius: '10px',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                  background: 'transparent',
-                  color: 'white',
-                  fontWeight: '600',
-                  marginBottom: '24px',
-                }}
-              >
-                {plan.cta}
-              </button>
-            )}
-
-            {plan.name === 'Pro' && (
-              <a
-                href="https://rzp.io/rzp/vUnbWlh8"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px',
-                  borderRadius: '10px',
-                  background: '#6366f1',
-                  color: 'white',
-                  fontWeight: 600,
-                  textAlign: 'center',
-                  marginBottom: '24px',
-                  textDecoration: 'none',
-                }}
-              >
-                Upgrade to Pro — ₹1,250 / month
-              </a>
-            )}
-
-            {plan.name === 'Lifetime' && (
-              <a
-                href="https://rzp.io/rzp/X4uYDAYh"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px',
-                  borderRadius: '10px',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                  color: 'white',
-                  fontWeight: 600,
-                  textAlign: 'center',
-                  marginBottom: '24px',
-                  textDecoration: 'none',
-                }}
-              >
-                Get Lifetime — ₹8,250
-              </a>
-            )}
-
-            {/* Features */}
-            {plan.features.map((f) => (
-              <p key={f} style={{ fontSize: '13px', color: f.startsWith('❌') ? '#475569' : '#cbd5e1' }}>
-                {f}
-              </p>
-            ))}
           </div>
         ))}
       </div>
