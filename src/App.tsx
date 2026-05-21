@@ -410,7 +410,8 @@ function App() {
         <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', fontSize: '13px', color: '#64748b', flexWrap: 'wrap', marginBottom: '24px' }}>
           <a href="/privacy.html" style={{ color: '#64748b', textDecoration: 'none' }}>Privacy Policy</a>
           <a href="/terms.html" style={{ color: '#64748b', textDecoration: 'none' }}>Terms of Service</a>
-          <a href="mailto:assetforgelabs@gmail.com" style={{ color: '#64748b', textDecoration: 'none' }}>Contact</a>
+          <a href="/refund.html" style={{ color: '#64748b', textDecoration: 'none' }}>Cancellation & Refund Policy</a>
+          <a href="mailto:assetforgelabs@gmail.com" style={{ color: '#64748b', textDecoration: 'none' }}>Contact Us</a>
         </div>
 
         {/* Social Media Logos */}
