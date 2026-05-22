@@ -3,7 +3,34 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Default Light Mode */
 :root {
+  --primary: #6366f1;
+  --accent: #8b5cf6;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
+  --border: rgba(0, 0, 0, 0.1);
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --success: #10b981;
+  
+  /* Missing variables from your app.css */
+  --accent-bg: rgba(139, 92, 246, 0.1);
+  --accent-border: rgba(139, 92, 246, 0.5);
+  --text-h: #000000;
+  --social-bg: #e2e8f0;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  /* Scrollbar & Glass */
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --scroll-track: #f1f5f9;
+  --scroll-thumb: rgba(0, 0, 0, 0.2);
+}
+
+/* Dark Mode (Your exact original colors) */
+[data-theme='dark'] {
   --primary: #6366f1;
   --accent: #8b5cf6;
   --bg: #0a0a0f;
@@ -13,23 +40,39 @@
   --text: #f8fafc;
   --text-muted: #94a3b8;
   --success: #10b981;
+  
+  /* Missing variables from your app.css */
+  --accent-bg: rgba(139, 92, 246, 0.15);
+  --accent-border: rgba(139, 92, 246, 0.5);
+  --text-h: #ffffff;
+  --social-bg: rgba(255, 255, 255, 0.05);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+  /* Scrollbar & Glass */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --scroll-track: #0a0a0f;
+  --scroll-thumb: rgba(255, 255, 255, 0.1);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background-color: #0a0a0f;
-  color: #f8fafc;
+  background-color: var(--bg);
+  color: var(--text);
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   line-height: 1.5;
   min-height: 100vh;
+  /* This transition makes the theme switch smooth */
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 16px;
+  transition: background 0.4s ease, border 0.4s ease;
 }
 
 .glow { box-shadow: 0 0 20px rgba(99, 102, 241, 0.4); }
@@ -47,5 +90,5 @@ body {
 .pulse-dot { animation: pulse 1.5s ease-in-out infinite; }
 
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0a0a0f; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
+::-webkit-scrollbar-track { background: var(--scroll-track); }
+::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 99px; }
