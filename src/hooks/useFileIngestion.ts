@@ -15,7 +15,7 @@ const BLOCKED_EXTENSIONS = [
   '.py', '.rb', '.msi', '.dll', '.scr',
 ]
 
-export function useFileIngestion() {
+export function useFileIngestion(isPro: boolean) {
   const [files,  setFiles]  = useState<IngestedFile[]>([])
   const [error,  setError]  = useState<string | null>(null)
 
@@ -43,12 +43,10 @@ export function useFileIngestion() {
       return
     }
 
-    // Check free limit (Bypassed instantly if user is Pro)
+    // STRICT PRO CHECK: Prevent free users from bypassing the 50MB limit
     const incoming = arr.reduce((acc, f) => acc + f.size, 0)
-    const isUserPro = localStorage.getItem('afl_pro_activated') === 'true'
-    
-    if (!isUserPro && (totalSize + incoming > FREE_LIMIT_BYTES)) {
-      setError('Free plan limit is 50MB. Upgrade to Pro for unlimited size.')
+    if (!isPro && (totalSize + incoming > FREE_LIMIT_BYTES)) {
+      setError('Free plan limit is 50MB. Upgrade to Pro for unlimited file size packaging.')
       return
     }
 

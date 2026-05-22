@@ -13,15 +13,17 @@ import MarketplacePreviewPanel from './components/MarketplacePreviewPanel'
 import ListingScore from './components/ListingScore'
 
 function App() {
-  const ingestion = useFileIngestion()
-  const zipper    = useZipGenerator()
-  const [productName, setProductName] = useState('')
-  const [metadata, setMetadata] = useState('')
-  
-  // --- PRO TIER SYSTEM CODE WITH LIFETIME SUPPORT ---
+  // 1. CHECK PRO STATUS FIRST (Crucial for passing down to tools)
   const [isPro, setIsPro] = useState(() => {
     return localStorage.getItem('afl_pro_activated') === 'true'
   })
+
+  // 2. INITIALIZE HOOKS WITH PRO STATUS
+  const ingestion = useFileIngestion(isPro)
+  const zipper    = useZipGenerator()
+  
+  const [productName, setProductName] = useState('')
+  const [metadata, setMetadata] = useState('')
   const [secretKey, setSecretKey] = useState('')
   const [keyError, setKeyError] = useState('')
 
@@ -58,7 +60,6 @@ function App() {
     setIsPro(false)
     localStorage.removeItem('afl_pro_activated')
   }
-  // --- END PRO TIER SYSTEM CODE ---
 
   const [showPricing, setShowPricing] = useState(false)
   const fullDescription = metadata
@@ -77,7 +78,7 @@ function App() {
   return (
     <div style={{ backgroundColor: 'var(--bg)', color: 'var(--text)', minHeight: '100vh', fontFamily: 'Inter, sans-serif', transition: 'background-color 0.4s ease, color 0.4s ease' }}>
 
-      {/* Sticky Navbar - Mobile Optimized Layout Updates */}
+      {/* Sticky Navbar */}
       <nav style={{ 
         display: 'flex', 
         alignItems: 'center', 
@@ -242,7 +243,7 @@ function App() {
         </div>
 
         {/* Drop Zone Component Module */}
-        <DragDropZone ingestion={ingestion} />
+        <DragDropZone ingestion={ingestion} isPro={isPro} />
 
         {/* Listing Health Score Widget */}
         <ListingScore
@@ -263,6 +264,7 @@ function App() {
         <MetadataForm
           productName={productName}
           onMetadataGenerated={(md) => setMetadata(md)}
+          isPro={isPro}
         />
 
         {/* Live Marketplace UI Sandbox */}
