@@ -9,9 +9,13 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          utils: ['jszip', 'file-saver'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('jszip') || id.includes('file-saver')) {
+              return 'utils';
+            }
+            return 'vendor';
+          }
         }
       }
     }
