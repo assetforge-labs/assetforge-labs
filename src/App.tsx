@@ -1,78 +1,30 @@
 import ThemeToggle from './ThemeToggle'
 import FeedbackSection from './components/FeedbackSection'
 import './index.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useFileIngestion } from './hooks/useFileIngestion'
 import { useZipGenerator } from './hooks/useZipGenerator'
 import DragDropZone from './components/DragDropZone'
 import MetadataForm from './components/MetadataForm'
-import PricingSection from './components/PricingSection'
-import ProGate from './components/ProGate'
 import SmartAnalyzer from './components/SmartAnalyzer'
 import MarketplacePreviewPanel from './components/MarketplacePreviewPanel'
 import ListingScore from './components/ListingScore'
 
 function App() {
-  // 1. CHECK PRO STATUS FIRST (Crucial for passing down to tools)
-  const [isPro, setIsPro] = useState(() => {
-    return localStorage.getItem('afl_pro_activated') === 'true'
-  })
+  // 1. HARDCODE PRO STATUS TO TRUE (Unlocks everything for everyone)
+  const isPro = true
 
-  // 2. INITIALIZE HOOKS WITH PRO STATUS
+  // 2. INITIALIZE HOOKS
   const ingestion = useFileIngestion(isPro)
   const zipper    = useZipGenerator()
   
   const [productName, setProductName] = useState('')
   const [metadata, setMetadata] = useState('')
-  const [secretKey, setSecretKey] = useState('')
-  const [keyError, setKeyError] = useState('')
 
-  const MASTER_UNLOCK_KEY = 'LAUNCH_2026_PRO' 
-  const LIFETIME_UNLOCK_KEY = 'LIFETIME_FOUNDER_2026'
-
-  // Catch automated URL callbacks coming from Razorpay button routines
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search)
-    const paymentStatus = urlParams.get('status')
-    const incomingLicense = urlParams.get('key')
-
-    if (paymentStatus === 'success' && (incomingLicense === MASTER_UNLOCK_KEY || incomingLicense === LIFETIME_UNLOCK_KEY)) {
-      setIsPro(true)
-      localStorage.setItem('afl_pro_activated', 'true')
-      window.history.replaceState({}, document.title, window.location.pathname)
-      alert('🎉 Payment Confirmed! Your AssetForge Labs premium license has been auto-activated on this device.')
-    }
-  }, [])
-
-  function handleUnlockKey() {
-    const cleanKey = secretKey.trim()
-    if (cleanKey === MASTER_UNLOCK_KEY || cleanKey === LIFETIME_UNLOCK_KEY) {
-      setIsPro(true)
-      localStorage.setItem('afl_pro_activated', 'true')
-      setKeyError('')
-      alert('🎉 Key Verified! AssetForge Labs Premium Tier Active.')
-    } else {
-      setKeyError('❌ Invalid License Key. Please verify your purchase details.')
-    }
-  }
-
-  function handleLogoutPro() {
-    setIsPro(false)
-    localStorage.removeItem('afl_pro_activated')
-  }
-
-  const [showPricing, setShowPricing] = useState(false)
   const fullDescription = metadata
 
   async function handleGenerate() {
     await zipper.generate(ingestion.files, productName, metadata)
-  }
-
-  function scrollToPricing() {
-    setShowPricing(true)
-    setTimeout(() => {
-      document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
-    }, 100)
   }
 
   return (
@@ -112,11 +64,7 @@ function App() {
         
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'nowrap' }}>
           <a href="#features" style={{ fontSize: '13px', color: 'var(--text-muted)', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.4s ease' }}>Features</a>
-          <a href="#pricing" onClick={(e) => { e.preventDefault(); scrollToPricing() }} style={{ fontSize: '13px', color: 'var(--text-muted)', textDecoration: 'none', cursor: 'pointer', whiteSpace: 'nowrap', transition: 'color 0.4s ease' }}>Pricing</a>
-          {isPro
-            ? <span style={{ fontSize: '12px', background: 'rgba(99,102,241,0.2)', border: '1px solid rgba(99,102,241,0.4)', color: '#6366f1', padding: '4px 10px', borderRadius: '99px', whiteSpace: 'nowrap' }}>⚡ Pro</span>
-            : <button onClick={scrollToPricing} style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: 'white', fontSize: '12px', padding: '6px 12px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontWeight: '600', whiteSpace: 'nowrap' }}>Get Started</button>
-          }
+          <span style={{ fontSize: '12px', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)', color: '#10b981', padding: '4px 10px', borderRadius: '99px', whiteSpace: 'nowrap', fontWeight: '600' }}>✨ 100% Free Forever</span>
           <ThemeToggle />
         </div>
       </nav>
@@ -163,71 +111,6 @@ function App() {
       {/* Main App Container */}
       <section style={{ maxWidth: '760px', margin: '0 auto', padding: '0 24px 80px' }}>
 
-        {/* Free plan notice banner */}
-        {!isPro && (
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--accent-bg)', border: '1px solid var(--accent-border)', borderRadius: '10px', padding: '10px 16px', marginBottom: '24px', fontSize: '13px', flexWrap: 'wrap', gap: '8px', transition: 'background-color 0.4s ease, border-color 0.4s ease' }}>
-            <span style={{ color: 'var(--text-muted)' }}>🆓 <strong style={{ color: 'var(--primary)' }}>Free Plan</strong> — 50MB limit · Upgrade for unlimited sizing</span>
-            <button onClick={scrollToPricing} style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: 'white', fontSize: '12px', padding: '5px 14px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontWeight: '600' }}>
-              Upgrade ⚡
-            </button>
-          </div>
-        )}
-
-        {/* Pro / Lifetime Manual Activation Card */}
-        <div style={{
-          backgroundColor: isPro ? 'rgba(16,185,129,0.04)' : 'var(--surface)',
-          border: isPro ? '1px solid rgba(16,185,129,0.2)' : '1px solid var(--border)',
-          borderRadius: '12px',
-          padding: '16px',
-          marginBottom: '24px',
-          transition: 'background-color 0.4s ease, border-color 0.4s ease'
-        }}>
-          {isPro ? (
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '13px', color: '#10b981', fontWeight: '600' }}>
-                ⚡ AssetForge Labs Premium Tier is Active on this Device
-              </span>
-              <button 
-                onClick={handleLogoutPro}
-                style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: '12px', cursor: 'pointer', textDecoration: 'underline' }}
-              >
-                Deactivate Key
-              </button>
-            </div>
-          ) : (
-            <div>
-              <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '6px' }}>
-                Already purchased? Enter your License Key or Founder Key below to unlock:
-              </label>
-              <div style={{ display: 'flex', gap: '8px' }}>
-                <input
-                  type="text"
-                  placeholder="Paste your license code here..."
-                  value={secretKey}
-                  onChange={(e) => setSecretKey(e.target.value)}
-                  style={{
-                    flex: 1, padding: '8px 12px', backgroundColor: 'var(--surface-2)',
-                    border: '1px solid var(--border)', borderRadius: '6px',
-                    color: 'var(--text)', fontSize: '13px', outline: 'none',
-                    transition: 'background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease'
-                  }}
-                />
-                <button
-                  onClick={handleUnlockKey}
-                  style={{
-                    padding: '8px 16px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-                    color: 'white', border: 'none', borderRadius: '6px', fontSize: '13px',
-                    fontWeight: '600', cursor: 'pointer'
-                  }}
-                >
-                  Activate License
-                </button>
-              </div>
-              {keyError && <p style={{ color: '#ef4444', fontSize: '11px', marginTop: '6px' }}>{keyError}</p>}
-            </div>
-          )}
-        </div>
-
         {/* Product Name Form Input */}
         <div style={{ marginBottom: '16px' }}>
           <label style={{ display: 'block', fontSize: '13px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>
@@ -243,7 +126,7 @@ function App() {
         </div>
 
         {/* Drop Zone Component Module */}
-        <DragDropZone ingestion={ingestion} isPro={isPro} />
+        <DragDropZone ingestion={ingestion} />
 
         {/* Listing Health Score Widget */}
         <ListingScore
@@ -273,11 +156,6 @@ function App() {
           description={fullDescription}
           fileCount={ingestion.files.length}
         />
-
-        {/* Premium Lockout Safeguard Guardrails */}
-        {!isPro && (
-          <ProGate feature="Batch Processing — Generate 10 ZIPs at once" onUpgrade={scrollToPricing} />
-        )}
 
         {/* Core Generator Action Interface */}
         {ingestion.files.length > 0 && !zipper.isGenerating && !zipper.isDone && (
@@ -327,14 +205,6 @@ function App() {
               >
                 Package another →
               </button>
-              {!isPro && (
-                <button
-                  onClick={scrollToPricing}
-                  style={{ padding: '10px 20px', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', border: 'none', borderRadius: '8px', color: 'white', fontSize: '14px', cursor: 'pointer', fontWeight: '600' }}
-                >
-                  ⚡ Unlock Premium
-                </button>
-              )}
             </div>
           </div>
         )}
@@ -401,9 +271,6 @@ function App() {
           ))}
         </div>
       </section>
-
-      {/* Pricing Matrix Component Mounting */}
-      {showPricing && <PricingSection />}
        
       {/* Community Creator Feedback Board */}
       <FeedbackSection />
@@ -423,7 +290,6 @@ function App() {
 
         {/* Social Media Logos */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '24px' }}>
-          {/* Official Instagram Logo */}
           <a 
             href="https://www.instagram.com/assetforgelabs/" 
             target="_blank" 
@@ -436,8 +302,6 @@ function App() {
               <path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5Z" />
             </svg>
           </a>
-
-          {/* Official X Logo */}
           <a 
             href="https://x.com/AssetForgeLabs" 
             target="_blank" 
@@ -450,8 +314,6 @@ function App() {
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 3.974H5.078z" />
             </svg>
           </a>
-
-          {/* Official LinkedIn Logo */}
           <a 
             href="https://www.linkedin.com/in/assetforge-labs-914536410" 
             target="_blank" 

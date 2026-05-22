@@ -4,10 +4,9 @@ import FileQueue from './FileQueue'
 
 interface Props {
   ingestion: ReturnType<typeof useFileIngestion>
-  isPro: boolean
 }
 
-export default function DragDropZone({ ingestion, isPro }: Props) {
+export default function DragDropZone({ ingestion }: Props) {
   const [isDragActive, setIsDragActive] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -93,21 +92,10 @@ export default function DragDropZone({ ingestion, isPro }: Props) {
         <div style={{ marginTop: '16px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '6px', transition: 'color 0.4s ease' }}>
             <span>{ingestion.files.length} file{ingestion.files.length > 1 ? 's' : ''} queued</span>
-            <span style={{ color: isPro ? '#10b981' : 'inherit', fontWeight: isPro ? 600 : 400 }}>
-              {formatSize(ingestion.totalSize)} {isPro ? '/ ∞ (Pro Unlimited)' : '/ 50 MB (Free Plan)'}
+            <span style={{ color: '#10b981', fontWeight: 600 }}>
+              {formatSize(ingestion.totalSize)} / ∞ (Free Unlimited)
             </span>
           </div>
-          
-          {/* Only show the capacity bar if the user is NOT pro */}
-          {!isPro && (
-            <div style={{ background: 'var(--surface-2)', borderRadius: '99px', height: '4px', transition: 'background-color 0.4s ease' }}>
-              <div style={{
-                background: '#6366f1', height: '4px', borderRadius: '99px',
-                width: `${Math.min((ingestion.totalSize / (50 * 1024 * 1024)) * 100, 100)}%`,
-                transition: 'width 0.3s ease'
-              }} />
-            </div>
-          )}
         </div>
       )}
 
