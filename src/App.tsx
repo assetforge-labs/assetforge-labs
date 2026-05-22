@@ -1,3 +1,4 @@
+import ThemeToggle from './ThemeToggle'
 import FeedbackSection from './components/FeedbackSection'
 import './index.css'
 import { useState, useEffect } from 'react'
@@ -114,6 +115,7 @@ function App() {
             ? <span style={{ fontSize: '12px', background: 'rgba(99,102,241,0.2)', border: '1px solid rgba(99,102,241,0.4)', color: '#a5b4fc', padding: '4px 10px', borderRadius: '99px', whiteSpace: 'nowrap' }}>⚡ Pro</span>
             : <button onClick={scrollToPricing} style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: 'white', fontSize: '12px', padding: '6px 12px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontWeight: '600', whiteSpace: 'nowrap' }}>Get Started</button>
           }
+          <ThemeToggle />
         </div>
       </nav>
 
