@@ -43,19 +43,6 @@ const STARS_TEXT: Record<number, string> = {
 
 const TW = 'https://twitter.com/intent/tweet?text=Just+found+AssetForge+Labs+%E2%80%94+best+digital+asset+packager+for+creators!+AI-powered+%26+100%25+browser-based+%F0%9F%94%A5&url=https://assetforgelabs.com'
 const LI = 'https://www.linkedin.com/sharing/share-offsite/?url=https://assetforgelabs.com'
-const FB = 'https://www.facebook.com/sharer/sharer.php?u=https://assetforgelabs.com'
-
-const linkStyle: React.CSSProperties = {
-  padding: '8px 16px',
-  borderRadius: '8px',
-  border: '1px solid rgba(255,255,255,0.1)',
-  background: 'rgba(255,255,255,0.03)',
-  color: '#94a3b8',
-  fontSize: '13px',
-  textDecoration: 'none',
-  fontWeight: 500,
-  display: 'inline-block',
-}
 
 const inputBase: React.CSSProperties = {
   width: '100%',
@@ -109,18 +96,18 @@ export default function FeedbackSection() {
     try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch { /* ignore */ }
     try {
     await fetch('https://api.web3forms.com/submit', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    access_key: '0cd76dea-5efc-4afb-b4b2-5bccaca5d4ec',
-    subject: 'New Suggestion — AssetForge Labs',
-    from_name: 'AssetForge Labs Feedback',
-    suggestion: text,
-    category: cat,
-    user_email: email || 'Anonymous',
-    mood: mood || 'Not specified',
-  }),
-})
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: '0cd76dea-5efc-4afb-b4b2-5bccaca5d4ec',
+        subject: 'New Suggestion — AssetForge Labs',
+        from_name: 'AssetForge Labs Feedback',
+        suggestion: text,
+        category: cat,
+        user_email: email || 'Anonymous',
+        mood: mood || 'Not specified',
+      }),
+    })
     } catch { /* ignore */ }
     setSending(false)
     setSent(true)
@@ -323,10 +310,48 @@ export default function FeedbackSection() {
 
                   <div style={{ marginTop: '32px', padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.07)' }}>
                     <p style={{ fontSize: '13px', color: '#94a3b8', marginBottom: '12px' }}>Love it? Share with other creators:</p>
-                    <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
-                      <a href={TW} target="_blank" rel="noopener noreferrer" style={linkStyle}>🐦 Twitter/X</a>
-                      <a href={LI} target="_blank" rel="noopener noreferrer" style={linkStyle}>💼 LinkedIn</a>
-                      <a href={FB} target="_blank" rel="noopener noreferrer" style={linkStyle}>📘 Facebook</a>
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
+                      {/* Official Instagram Logo */}
+                      <a 
+                        href="https://www.instagram.com/assetforgelabs/" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} 
+                        onMouseOver={(e) => e.currentTarget.style.color = '#e1306c'} 
+                        onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.415.56.217.96.477 1.38.898.42.42.68.82 1.38.897.414.053 1.171.07 4.851.071H12h-.001c-3.204 0-3.584-.012-4.85-.07-1.17-.054-1.805-.249-2.227-.415a3.146 3.146 0 0 1-1.38-.898A3.146 3.146 0 0 1 2.25 12h.001c0 3.204.012 3.584.07 4.85.054 1.17.249 1.805.415 2.227a3.146 3.146 0 0 1 .898 1.38 3.146 3.146 0 0 1 12 21.75h-.001c3.204 0 3.584-.012 4.85-.07 1.17-.054 1.805-.249 2.227-.415.56-.217.96-.477 1.38-.898.42-.42.68-.82.898-1.38a3.146 3.146 0 0 0 .415-2.227c.053-1.17.07-1.17.07-4.85H2.163zM12 7.18a4.82 4.82 0 0 0-4.82 4.82A4.82 4.82 0 0 0 12 16.82a4.82 4.82 0 0 0 4.82-4.82A4.82 4.82 0 0 0 12 7.18zm0 7.933a3.113 3.113 0 0 1-3.113-3.113A3.113 3.113 0 0 1 12 8.887a3.113 3.113 0 0 1 3.113 3.113A3.113 3.113 0 0 1 12 15.113zm5.288-8.507a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25z" />
+                        </svg>
+                      </a>
+
+                      {/* Official X Logo */}
+                      <a 
+                        href={TW} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} 
+                        onMouseOver={(e) => e.currentTarget.style.color = 'var(--text)'} 
+                        onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 3.974H5.078z" />
+                        </svg>
+                      </a>
+
+                      {/* Official LinkedIn Logo */}
+                      <a 
+                        href={LI} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} 
+                        onMouseOver={(e) => e.currentTarget.style.color = '#0a66c2'} 
+                        onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -343,7 +368,7 @@ export default function FeedbackSection() {
                     {stars < 4 ? ' We will work hard to earn that 5th star!' : ''}
                   </p>
                   {stars >= 4 && (
-                    <a href={ratingTweetUrl} target="_blank" rel="noopener noreferrer" style={{ ...linkStyle, background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: 'white', border: 'none', padding: '10px 24px', fontWeight: 700 }}>
+                    <a href={ratingTweetUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', padding: '10px 24px', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', borderRadius: '8px', color: 'white', fontSize: '13px', textDecoration: 'none', fontWeight: 700 }}>
                       🐦 Share on Twitter/X
                     </a>
                   )}

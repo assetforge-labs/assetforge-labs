@@ -123,9 +123,9 @@ function App() {
       {/* Hero */}
       <section className="fade-in" style={{ textAlign: 'center', padding: '72px 24px 48px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: '#6366f1', marginBottom: '24px', textAlign: 'left' }}>
-  <span className="pulse-dot" style={{ width: '8px', height: '8px', minWidth: '8px', minHeight: '8px', borderRadius: '50%', background: '#6366f1', display: 'inline-block', flexShrink: 0 }} />
-  <span>World's First Digital asset packaging tool for creators selling on Etsy, Gumroad, Creative Market & more+</span>
-</div>
+          <span className="pulse-dot" style={{ width: '8px', height: '8px', minWidth: '8px', minHeight: '8px', borderRadius: '50%', background: '#6366f1', display: 'inline-block', flexShrink: 0 }} />
+          <span>World's First Digital asset packaging tool for creators selling on Etsy, Gumroad, Creative Market & more+</span>
+        </div>
         <h1 style={{ fontSize: 'clamp(32px, 6vw, 64px)', fontWeight: '800', lineHeight: '1.1', marginBottom: '20px' }}>
           Package. Optimize. Sell.<br />
           <span style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6,#ec4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>All in Your Browser.</span>
@@ -421,6 +421,20 @@ function App() {
 
         {/* Social Media Logos */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '24px' }}>
+          {/* Official Instagram Logo */}
+          <a 
+            href="https://www.instagram.com/assetforgelabs/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} 
+            onMouseOver={(e) => e.currentTarget.style.color = '#e1306c'} 
+            onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.415.56.217.96.477 1.38.898.42.42.68.82 1.38.897.414.053 1.171.07 4.851.071H12h-.001c-3.204 0-3.584-.012-4.85-.07-1.17-.054-1.805-.249-2.227-.415a3.146 3.146 0 0 1-1.38-.898A3.146 3.146 0 0 1 2.25 12h.001c0 3.204.012 3.584.07 4.85.054 1.17.249 1.805.415 2.227a3.146 3.146 0 0 1 .898 1.38 3.146 3.146 0 0 1 12 21.75h-.001c3.204 0 3.584-.012 4.85-.07 1.17-.054 1.805-.249 2.227-.415.56-.217.96-.477 1.38-.898.42-.42.68-.82.898-1.38a3.146 3.146 0 0 0 .415-2.227c.053-1.17.07-1.17.07-4.85H2.163zM12 7.18a4.82 4.82 0 0 0-4.82 4.82A4.82 4.82 0 0 0 12 16.82a4.82 4.82 0 0 0 4.82-4.82A4.82 4.82 0 0 0 12 7.18zm0 7.933a3.113 3.113 0 0 1-3.113-3.113A3.113 3.113 0 0 1 12 8.887a3.113 3.113 0 0 1 3.113 3.113A3.113 3.113 0 0 1 12 15.113zm5.288-8.507a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25z" />
+            </svg>
+          </a>
+
           {/* Official X Logo */}
           <a 
             href="https://x.com/AssetForgeLabs" 
