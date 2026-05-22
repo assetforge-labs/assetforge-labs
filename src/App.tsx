@@ -75,7 +75,7 @@ function App() {
   }
 
   return (
-    <div style={{ background: '#0a0a0f', color: '#f8fafc', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
+    <div style={{ backgroundColor: 'var(--bg)', color: 'var(--text)', minHeight: '100vh', fontFamily: 'Inter, sans-serif', transition: 'background-color 0.4s ease, color 0.4s ease' }}>
 
       {/* Sticky Navbar - Mobile Optimized Layout Updates */}
       <nav style={{ 
@@ -85,12 +85,13 @@ function App() {
         padding: '12px 16px', 
         gap: '12px',
         flexWrap: 'wrap',
-        borderBottom: '1px solid rgba(255,255,255,0.05)', 
+        borderBottom: '1px solid var(--border)', 
         position: 'sticky', 
         top: 0, 
-        background: 'rgba(10,10,15,0.95)', 
+        backgroundColor: 'var(--bg)', 
         backdropFilter: 'blur(12px)', 
-        zIndex: 100 
+        zIndex: 100,
+        transition: 'background-color 0.4s ease, border-color 0.4s ease'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
           <svg width="30" height="30" viewBox="0 0 36 36" fill="none">
@@ -109,10 +110,10 @@ function App() {
         </div>
         
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'nowrap' }}>
-          <a href="#features" style={{ fontSize: '13px', color: '#94a3b8', textDecoration: 'none', whiteSpace: 'nowrap' }}>Features</a>
-          <a href="#pricing" onClick={(e) => { e.preventDefault(); scrollToPricing() }} style={{ fontSize: '13px', color: '#94a3b8', textDecoration: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>Pricing</a>
+          <a href="#features" style={{ fontSize: '13px', color: 'var(--text-muted)', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.4s ease' }}>Features</a>
+          <a href="#pricing" onClick={(e) => { e.preventDefault(); scrollToPricing() }} style={{ fontSize: '13px', color: 'var(--text-muted)', textDecoration: 'none', cursor: 'pointer', whiteSpace: 'nowrap', transition: 'color 0.4s ease' }}>Pricing</a>
           {isPro
-            ? <span style={{ fontSize: '12px', background: 'rgba(99,102,241,0.2)', border: '1px solid rgba(99,102,241,0.4)', color: '#a5b4fc', padding: '4px 10px', borderRadius: '99px', whiteSpace: 'nowrap' }}>⚡ Pro</span>
+            ? <span style={{ fontSize: '12px', background: 'rgba(99,102,241,0.2)', border: '1px solid rgba(99,102,241,0.4)', color: '#6366f1', padding: '4px 10px', borderRadius: '99px', whiteSpace: 'nowrap' }}>⚡ Pro</span>
             : <button onClick={scrollToPricing} style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: 'white', fontSize: '12px', padding: '6px 12px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontWeight: '600', whiteSpace: 'nowrap' }}>Get Started</button>
           }
           <ThemeToggle />
@@ -129,7 +130,7 @@ function App() {
           Package. Optimize. Sell.<br />
           <span style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6,#ec4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>All in Your Browser.</span>
         </h1>
-        <p style={{ color: '#94a3b8', fontSize: '18px', maxWidth: '560px', margin: '0 auto 32px', lineHeight: '1.7' }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: '18px', maxWidth: '560px', margin: '0 auto 32px', lineHeight: '1.7', transition: 'color 0.4s ease' }}>
           The only tool that packages your files, analyzes your market instantly, shows a live marketplace preview, and scores your SEO — all 100% free, no uploads, no servers.
         </p>
 
@@ -153,7 +154,7 @@ function App() {
             { icon: '📦', text: '89,000+ ZIPs generated' },
             { icon: '⭐', text: '4.9/5 rating' },
           ].map((s) => (
-            <div key={s.text} style={{ fontSize: '13px', color: '#64748b' }}>{s.icon} {s.text}</div>
+            <div key={s.text} style={{ fontSize: '13px', color: 'var(--text-muted)', transition: 'color 0.4s ease' }}>{s.icon} {s.text}</div>
           ))}
         </div>
       </section>
@@ -163,8 +164,8 @@ function App() {
 
         {/* Free plan notice banner */}
         {!isPro && (
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(99,102,241,0.06)', border: '1px solid rgba(99,102,241,0.15)', borderRadius: '10px', padding: '10px 16px', marginBottom: '24px', fontSize: '13px', flexWrap: 'wrap', gap: '8px' }}>
-            <span style={{ color: '#94a3b8' }}>🆓 <strong style={{ color: '#a5b4fc' }}>Free Plan</strong> — 50MB limit · Upgrade for unlimited sizing</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--accent-bg)', border: '1px solid var(--accent-border)', borderRadius: '10px', padding: '10px 16px', marginBottom: '24px', fontSize: '13px', flexWrap: 'wrap', gap: '8px', transition: 'background-color 0.4s ease, border-color 0.4s ease' }}>
+            <span style={{ color: 'var(--text-muted)' }}>🆓 <strong style={{ color: 'var(--primary)' }}>Free Plan</strong> — 50MB limit · Upgrade for unlimited sizing</span>
             <button onClick={scrollToPricing} style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: 'white', fontSize: '12px', padding: '5px 14px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontWeight: '600' }}>
               Upgrade ⚡
             </button>
@@ -173,11 +174,12 @@ function App() {
 
         {/* Pro / Lifetime Manual Activation Card */}
         <div style={{
-          background: isPro ? 'rgba(16,185,129,0.04)' : 'rgba(255,255,255,0.01)',
-          border: isPro ? '1px solid rgba(16,185,129,0.2)' : '1px solid rgba(255,255,255,0.06)',
+          backgroundColor: isPro ? 'rgba(16,185,129,0.04)' : 'var(--surface)',
+          border: isPro ? '1px solid rgba(16,185,129,0.2)' : '1px solid var(--border)',
           borderRadius: '12px',
           padding: '16px',
-          marginBottom: '24px'
+          marginBottom: '24px',
+          transition: 'background-color 0.4s ease, border-color 0.4s ease'
         }}>
           {isPro ? (
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -186,14 +188,14 @@ function App() {
               </span>
               <button 
                 onClick={handleLogoutPro}
-                style={{ background: 'none', border: 'none', color: '#64748b', fontSize: '12px', cursor: 'pointer', textDecoration: 'underline' }}
+                style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: '12px', cursor: 'pointer', textDecoration: 'underline' }}
               >
                 Deactivate Key
               </button>
             </div>
           ) : (
             <div>
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', marginBottom: '6px' }}>
+              <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '6px' }}>
                 Already purchased? Enter your License Key or Founder Key below to unlock:
               </label>
               <div style={{ display: 'flex', gap: '8px' }}>
@@ -203,9 +205,10 @@ function App() {
                   value={secretKey}
                   onChange={(e) => setSecretKey(e.target.value)}
                   style={{
-                    flex: 1, padding: '8px 12px', background: 'rgba(0,0,0,0.2)',
-                    border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px',
-                    color: '#fff', fontSize: '13px', outline: 'none'
+                    flex: 1, padding: '8px 12px', backgroundColor: 'var(--surface-2)',
+                    border: '1px solid var(--border)', borderRadius: '6px',
+                    color: 'var(--text)', fontSize: '13px', outline: 'none',
+                    transition: 'background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease'
                   }}
                 />
                 <button
@@ -226,7 +229,7 @@ function App() {
 
         {/* Product Name Form Input */}
         <div style={{ marginBottom: '16px' }}>
-          <label style={{ display: 'block', fontSize: '13px', color: '#94a3b8', marginBottom: '8px', fontWeight: '500' }}>
+          <label style={{ display: 'block', fontSize: '13px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>
             Product Name
           </label>
           <input
@@ -234,7 +237,7 @@ function App() {
             placeholder="e.g. Procreate Watercolour Brush Pack Vol.1"
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
-            style={{ width: '100%', padding: '12px 16px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#f8fafc', fontSize: '15px', outline: 'none', fontFamily: 'Inter, sans-serif', fontWeight: '500' }}
+            style={{ width: '100%', padding: '12px 16px', backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '10px', color: 'var(--text)', fontSize: '15px', outline: 'none', fontFamily: 'Inter, sans-serif', fontWeight: '500', transition: 'background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease' }}
           />
         </div>
 
@@ -296,14 +299,14 @@ function App() {
         {/* Local Compression Progress Array */}
         {zipper.isGenerating && (
           <div className="fade-in" style={{ marginTop: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', color: '#94a3b8', marginBottom: '8px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', color: 'var(--text-muted)', marginBottom: '8px' }}>
               <span>⚙️ Packaging everything...</span>
               <span style={{ fontWeight: '600', color: '#6366f1' }}>{zipper.progress}%</span>
             </div>
-            <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '99px', height: '6px' }}>
+            <div style={{ backgroundColor: 'var(--surface-2)', borderRadius: '99px', height: '6px' }}>
               <div style={{ background: 'linear-gradient(90deg,#6366f1,#8b5cf6,#ec4899)', height: '6px', borderRadius: '99px', width: `${zipper.progress}%`, transition: 'width 0.2s ease' }} />
             </div>
-            <p style={{ textAlign: 'center', fontSize: '12px', color: '#94a3b8', marginTop: '8px' }}>Files never leave your device</p>
+            <p style={{ textAlign: 'center', fontSize: '12px', color: 'var(--text-muted)', marginTop: '8px' }}>Files never leave your device</p>
           </div>
         )}
 
@@ -312,7 +315,7 @@ function App() {
           <div className="fade-in" style={{ marginTop: '20px', padding: '28px', background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.25)', borderRadius: '16px', textAlign: 'center' }}>
             <div style={{ fontSize: '48px', marginBottom: '8px' }}>🎉</div>
             <p style={{ fontWeight: '800', fontSize: '20px', color: '#10b981', marginBottom: '4px' }}>Package Downloaded!</p>
-            <p style={{ fontSize: '13px', color: '#94a3b8', marginBottom: '20px' }}>
+            <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '20px' }}>
               Check your Downloads folder — SEO description + README all inside!
             </p>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -347,7 +350,7 @@ function App() {
         <h2 style={{ fontSize: '28px', fontWeight: 800, textAlign: 'center', marginBottom: '8px' }}>
           Ready in 3 simple steps
         </h2>
-        <p style={{ color: '#94a3b8', textAlign: 'center', fontSize: '15px', marginBottom: '40px' }}>
+        <p style={{ color: 'var(--text-muted)', textAlign: 'center', fontSize: '15px', marginBottom: '40px', transition: 'color 0.4s ease' }}>
           From files to market-ready package in under 60 seconds
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
@@ -356,11 +359,11 @@ function App() {
             { step: '02', icon: '🧠', title: 'Get Market Intel', desc: 'SmartAnalyzer instantly detects your asset type and shows best platform, price, keywords and revenue estimate.' },
             { step: '03', icon: '⚡', title: 'Download Package', desc: 'One click generates a structured ZIP with SEO metadata, README and marketplace listing — ready to upload.' },
           ].map((s) => (
-            <div key={s.step} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '16px', padding: '24px', position: 'relative' }}>
-              <span style={{ position: 'absolute', top: '16px', right: '16px', fontSize: '11px', fontWeight: 800, color: 'rgba(255,255,255,0.1)', letterSpacing: '0.05em' }}>{s.step}</span>
+            <div key={s.step} style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px', padding: '24px', position: 'relative', transition: 'background-color 0.4s ease, border-color 0.4s ease' }}>
+              <span style={{ position: 'absolute', top: '16px', right: '16px', fontSize: '11px', fontWeight: 800, color: 'var(--border)', letterSpacing: '0.05em' }}>{s.step}</span>
               <div style={{ fontSize: '32px', marginBottom: '12px' }}>{s.icon}</div>
-              <h3 style={{ fontWeight: 700, fontSize: '15px', marginBottom: '8px', color: '#f8fafc' }}>{s.title}</h3>
-              <p style={{ color: '#94a3b8', fontSize: '13px', lineHeight: '1.6' }}>{s.desc}</p>
+              <h3 style={{ fontWeight: 700, fontSize: '15px', marginBottom: '8px', color: 'var(--text)', transition: 'color 0.4s ease' }}>{s.title}</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '13px', lineHeight: '1.6', transition: 'color 0.4s ease' }}>{s.desc}</p>
             </div>
           ))}
         </div>
@@ -372,7 +375,7 @@ function App() {
           <h2 style={{ fontSize: '36px', fontWeight: '800', marginBottom: '12px' }}>
             Features no one else has
           </h2>
-          <p style={{ color: '#94a3b8', fontSize: '16px' }}>Built from scratch based on what digital asset sellers actually need</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: '16px', transition: 'color 0.4s ease' }}>Built from scratch based on what digital asset sellers actually need</p>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
           {[
@@ -383,15 +386,15 @@ function App() {
             { icon: '🔒', title: '100% Browser Private', desc: 'Files never leave your device. No server. No upload. No privacy risk. Impossible to hack.', badge: null },
             { icon: '⚡', title: 'Instant Download', desc: 'Generate and download your complete ready-to-list package in seconds. No waiting.', badge: null },
           ].map((card) => (
-            <div key={card.title} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '16px', padding: '24px', position: 'relative' }}>
+            <div key={card.title} style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px', padding: '24px', position: 'relative', transition: 'background-color 0.4s ease, border-color 0.4s ease' }}>
               {card.badge && (
                 <span style={{ position: 'absolute', top: '12px', right: '12px', fontSize: '9px', fontWeight: '800', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: 'white', padding: '3px 8px', borderRadius: '99px', letterSpacing: '0.05em' }}>
                   {card.badge}
                 </span>
               )}
               <div style={{ fontSize: '28px', marginBottom: '12px' }}>{card.icon}</div>
-              <h3 style={{ fontWeight: '700', marginBottom: '8px', fontSize: '15px' }}>{card.title}</h3>
-              <p style={{ color: '#94a3b8', fontSize: '13px', lineHeight: '1.6' }}>{card.desc}</p>
+              <h3 style={{ fontWeight: '700', marginBottom: '8px', fontSize: '15px', color: 'var(--text)', transition: 'color 0.4s ease' }}>{card.title}</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '13px', lineHeight: '1.6', transition: 'color 0.4s ease' }}>{card.desc}</p>
             </div>
           ))}
         </div>
@@ -404,16 +407,16 @@ function App() {
       <FeedbackSection />
 
       {/* Application Footer Element */}
-      <footer style={{ borderTop: '1px solid rgba(255,255,255,0.05)', padding: '40px 32px', textAlign: 'center' }}>
+      <footer style={{ borderTop: '1px solid var(--border)', padding: '40px 32px', textAlign: 'center', transition: 'border-color 0.4s ease' }}>
         <div style={{ fontWeight: '800', fontSize: '18px', marginBottom: '8px' }}>AssetForge Labs</div>
-        <p style={{ fontSize: '13px', color: '#64748b', marginBottom: '20px' }}>The world's most advanced digital asset packager</p>
+        <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '20px', transition: 'color 0.4s ease' }}>The world's most advanced digital asset packager</p>
         
         {/* Legal & Contact Links */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', fontSize: '13px', color: '#64748b', flexWrap: 'wrap', marginBottom: '24px' }}>
-          <a href="/privacy.html" style={{ color: '#64748b', textDecoration: 'none' }}>Privacy Policy</a>
-          <a href="/terms.html" style={{ color: '#64748b', textDecoration: 'none' }}>Terms of Service</a>
-          <a href="/refund.html" style={{ color: '#64748b', textDecoration: 'none' }}>Cancellation & Refund Policy</a>
-          <a href="mailto:assetforgelabs@gmail.com" style={{ color: '#64748b', textDecoration: 'none' }}>Contact Us</a>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', fontSize: '13px', color: 'var(--text-muted)', flexWrap: 'wrap', marginBottom: '24px' }}>
+          <a href="/privacy.html" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Privacy Policy</a>
+          <a href="/terms.html" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Terms of Service</a>
+          <a href="/refund.html" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Cancellation & Refund Policy</a>
+          <a href="mailto:assetforgelabs@gmail.com" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Contact Us</a>
         </div>
 
         {/* Social Media Logos */}
@@ -423,9 +426,9 @@ function App() {
             href="https://x.com/AssetForgeLabs" 
             target="_blank" 
             rel="noopener noreferrer" 
-            style={{ color: '#64748b', transition: 'color 0.2s' }} 
-            onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} 
-            onMouseOut={(e) => e.currentTarget.style.color = '#64748b'}
+            style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} 
+            onMouseOver={(e) => e.currentTarget.style.color = 'var(--text)'} 
+            onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 3.974H5.078z" />
@@ -437,9 +440,9 @@ function App() {
             href="https://www.linkedin.com/in/assetforge-labs-914536410" 
             target="_blank" 
             rel="noopener noreferrer" 
-            style={{ color: '#64748b', transition: 'color 0.2s' }} 
+            style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} 
             onMouseOver={(e) => e.currentTarget.style.color = '#0a66c2'} 
-            onMouseOut={(e) => e.currentTarget.style.color = '#64748b'}
+            onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
@@ -447,7 +450,7 @@ function App() {
           </a>
         </div>
 
-        <p style={{ fontSize: '12px', color: '#374151' }}>© 2026 AssetForge Labs. All rights reserved.</p>
+        <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>© 2026 AssetForge Labs. All rights reserved.</p>
       </footer>
 
     </div>
