@@ -1,3 +1,4 @@
+import LaunchBadges from './components/LaunchBadges';
 import ThemeToggle from './ThemeToggle'
 import FeedbackSection from './components/FeedbackSection'
 import './index.css'
