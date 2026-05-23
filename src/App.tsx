@@ -97,7 +97,6 @@ function App() {
             </span>
           ))}
         </div>
-        <LaunchBadges />
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: '32px', flexWrap: 'wrap' }}>
           {[
@@ -108,6 +107,8 @@ function App() {
             <div key={s.text} style={{ fontSize: '13px', color: 'var(--text-muted)', transition: 'color 0.4s ease' }}>{s.icon} {s.text}</div>
           ))}
         </div>
+        <LaunchBadges />
+        
       </section>
 
       {/* Main App Container */}
