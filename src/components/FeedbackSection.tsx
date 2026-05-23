@@ -137,7 +137,6 @@ export default function FeedbackSection() {
       background: on ? 'rgba(99,102,241,0.1)' : 'transparent',
       color: on ? '#4338ca' : '#334155',
       fontSize: '13px', fontWeight: on ? 600 : 400, cursor: 'pointer',
-    }
   } //
 
   // ✅ FIXED: High Contrast Colors for Accessibility
@@ -147,7 +146,6 @@ export default function FeedbackSection() {
       border: on ? '1px solid #4338ca' : '1px solid var(--border)',
       background: on ? 'rgba(99,102,241,0.1)' : 'var(--surface-2)',
       color: on ? '#4338ca' : '#334155', cursor: 'pointer',
-    }
   } //
 
   const ratingTweetUrl =
