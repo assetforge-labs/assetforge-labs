@@ -44,13 +44,14 @@ const STARS_TEXT: Record<number, string> = {
 const TW = 'https://twitter.com/intent/tweet?text=Just+found+AssetForge+Labs+%E2%80%94+best+digital+asset+packager+for+creators!+AI-powered+%26+100%25+browser-based+%F0%9F%94%A5&url=https://assetforgelabs.com'
 const LI = 'https://www.linkedin.com/sharing/share-offsite/?url=https://assetforgelabs.com'
 
+// ✅ FIXED: Using CSS variables instead of hardcoded white/dark colors
 const inputBase: React.CSSProperties = {
   width: '100%',
   padding: '10px 14px',
-  background: 'rgba(255,255,255,0.03)',
-  border: '1px solid rgba(255,255,255,0.1)',
+  background: 'var(--surface-2)',
+  border: '1px solid var(--border)',
   borderRadius: '8px',
-  color: '#f8fafc',
+  color: 'var(--text)',
   fontSize: '14px',
   outline: 'none',
   fontFamily: 'Inter, sans-serif',
@@ -128,22 +129,24 @@ export default function FeedbackSection() {
     try { localStorage.setItem('afl_r', String(n)) } catch { /* ignore */ }
   }
 
+  // ✅ FIXED: Using CSS variables
   function tabSt(on: boolean): React.CSSProperties {
     return {
       padding: '8px 18px', borderRadius: '8px', border: 'none',
-      borderBottom: on ? '2px solid #6366f1' : '2px solid transparent',
-      background: on ? 'rgba(99,102,241,0.2)' : 'transparent',
-      color: on ? '#a5b4fc' : '#64748b',
+      borderBottom: on ? '2px solid var(--primary)' : '2px solid transparent',
+      background: on ? 'rgba(99,102,241,0.1)' : 'transparent',
+      color: on ? 'var(--primary)' : 'var(--text-muted)',
       fontSize: '13px', fontWeight: on ? 600 : 400, cursor: 'pointer',
     }
   }
 
+  // ✅ FIXED: Using CSS variables
   function pillSt(on: boolean): React.CSSProperties {
     return {
       padding: '6px 14px', borderRadius: '99px', fontSize: '12px',
-      border: on ? '1px solid #6366f1' : '1px solid rgba(255,255,255,0.08)',
-      background: on ? 'rgba(99,102,241,0.15)' : 'transparent',
-      color: on ? '#a5b4fc' : '#64748b', cursor: 'pointer',
+      border: on ? '1px solid var(--primary)' : '1px solid var(--border)',
+      background: on ? 'rgba(99,102,241,0.1)' : 'var(--surface-2)',
+      color: on ? 'var(--primary)' : 'var(--text-muted)', cursor: 'pointer',
     }
   }
 
@@ -156,11 +159,11 @@ export default function FeedbackSection() {
     <section style={{ padding: '80px 24px', maxWidth: '760px', margin: '0 auto' }}>
 
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: '#6366f1', marginBottom: '16px' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: 'var(--primary)', marginBottom: '16px' }}>
           🧠 Built with creators, for creators
         </div>
-        <h2 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '12px' }}>You Shape AssetForge Labs</h2>
-        <p style={{ color: '#94a3b8', fontSize: '16px', maxWidth: '500px', margin: '0 auto' }}>
+        <h2 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '12px', color: 'var(--text)' }}>You Shape AssetForge Labs</h2>
+        <p style={{ color: 'var(--text-muted)', fontSize: '16px', maxWidth: '500px', margin: '0 auto' }}>
           Every feature in this tool came from creator feedback. Tell us what you need — the best ideas get built next.
         </p>
       </div>
@@ -168,15 +171,16 @@ export default function FeedbackSection() {
       <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', marginBottom: '32px', flexWrap: 'wrap' }}>
         {[['247', 'Suggestions received'], ['38', 'Features shipped'], ['94%', 'Users feel heard']].map(([v, l]) => (
           <div key={l} style={{ textAlign: 'center' }}>
-            <p style={{ fontSize: '24px', fontWeight: 800, color: '#6366f1', marginBottom: '2px' }}>{v}</p>
-            <p style={{ fontSize: '12px', color: '#64748b' }}>{l}</p>
+            <p style={{ fontSize: '24px', fontWeight: 800, color: 'var(--primary)', marginBottom: '2px' }}>{v}</p>
+            <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{l}</p>
           </div>
         ))}
       </div>
 
-      <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '20px', overflow: 'hidden' }}>
+      {/* ✅ FIXED: Replaced hardcoded rgba white with var(--surface) and var(--border) */}
+      <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '20px', overflow: 'hidden' }}>
 
-        <div style={{ display: 'flex', borderBottom: '1px solid rgba(255,255,255,0.07)', padding: '0 20px', gap: '4px' }}>
+        <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', padding: '0 20px', gap: '4px' }}>
           <button style={tabSt(tab === 'suggest')} onClick={() => setTab('suggest')}>💡 Suggest</button>
           <button style={tabSt(tab === 'vote')}    onClick={() => setTab('vote')}>🗳️ Vote</button>
           <button style={tabSt(tab === 'rate')}    onClick={() => setTab('rate')}>⭐ Rate Us</button>
@@ -188,9 +192,9 @@ export default function FeedbackSection() {
           {tab === 'suggest' && sent && (
             <div style={{ textAlign: 'center', padding: '32px 0' }}>
               <div style={{ fontSize: '56px', marginBottom: '16px' }}>🎉</div>
-              <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '8px', color: '#10b981' }}>Thank you! We got your suggestion.</h3>
-              <p style={{ color: '#94a3b8', fontSize: '14px', marginBottom: '24px' }}>We read every submission and will notify you when your idea ships.</p>
-              <button onClick={() => setSent(false)} style={{ padding: '10px 24px', background: 'none', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '8px', color: '#94a3b8', fontSize: '13px', cursor: 'pointer' }}>
+              <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '8px', color: 'var(--success)' }}>Thank you! We got your suggestion.</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '24px' }}>We read every submission and will notify you when your idea ships.</p>
+              <button onClick={() => setSent(false)} style={{ padding: '10px 24px', background: 'none', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text-muted)', fontSize: '13px', cursor: 'pointer' }}>
                 Submit another
               </button>
             </div>
@@ -200,14 +204,14 @@ export default function FeedbackSection() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
               <div>
-                <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', marginBottom: '10px', fontWeight: 500 }}>How are you feeling about AssetForge Labs today?</label>
+                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '10px', fontWeight: 500 }}>How are you feeling about AssetForge Labs today?</label>
                 <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                   {MOODS.map((m) => (
                     <button key={m.emoji} onClick={() => setMood(m.emoji)} style={{
                       display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 14px', borderRadius: '99px',
-                      border: mood === m.emoji ? '1px solid #6366f1' : '1px solid rgba(255,255,255,0.1)',
-                      background: mood === m.emoji ? 'rgba(99,102,241,0.15)' : 'rgba(255,255,255,0.02)',
-                      color: mood === m.emoji ? '#a5b4fc' : '#94a3b8', fontSize: '13px', cursor: 'pointer',
+                      border: mood === m.emoji ? '1px solid var(--primary)' : '1px solid var(--border)',
+                      background: mood === m.emoji ? 'rgba(99,102,241,0.1)' : 'var(--surface-2)',
+                      color: mood === m.emoji ? 'var(--primary)' : 'var(--text-muted)', fontSize: '13px', cursor: 'pointer',
                     }}>
                       <span style={{ fontSize: '18px' }}>{m.emoji}</span>{m.label}
                     </button>
@@ -216,7 +220,7 @@ export default function FeedbackSection() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', marginBottom: '8px', fontWeight: 500 }}>Category</label>
+                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: 500 }}>Category</label>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                   {CATS.map((c) => (
                     <button key={c.value} onClick={() => setCat(c.value)} style={pillSt(cat === c.value)}>{c.label}</button>
@@ -225,7 +229,7 @@ export default function FeedbackSection() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', marginBottom: '8px', fontWeight: 500 }}>Your suggestion *</label>
+                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: 500 }}>Your suggestion *</label>
                 <textarea
                   rows={4}
                   placeholder="e.g. It would be amazing if I could import files directly from Google Drive..."
@@ -235,13 +239,13 @@ export default function FeedbackSection() {
                 />
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '4px' }}>
                   <span style={{ fontSize: '12px', color: '#f87171' }}>{err ? '⚠️ ' + err : ''}</span>
-                  <span style={{ fontSize: '11px', color: chars > 180 ? '#f59e0b' : '#64748b' }}>{chars}/200</span>
+                  <span style={{ fontSize: '11px', color: chars > 180 ? '#f59e0b' : 'var(--text-muted)' }}>{chars}/200</span>
                 </div>
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', marginBottom: '8px', fontWeight: 500 }}>
-                  Email <span style={{ color: '#475569', fontWeight: 400 }}>(optional — get notified when idea ships)</span>
+                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: 500 }}>
+                  Email <span style={{ color: 'var(--text-muted)', fontWeight: 400 }}>(optional — get notified when idea ships)</span>
                 </label>
                 <input type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} style={inputBase} />
               </div>
@@ -254,7 +258,7 @@ export default function FeedbackSection() {
                 {sending ? '📨 Sending...' : '🚀 Submit Suggestion'}
               </button>
 
-              <p style={{ fontSize: '11px', color: '#475569', textAlign: 'center' }}>
+              <p style={{ fontSize: '11px', color: 'var(--text-muted)', textAlign: 'center' }}>
                 🔒 We read every single suggestion. The best ideas get built into the product.
               </p>
             </div>
@@ -263,25 +267,25 @@ export default function FeedbackSection() {
           {/* VOTE */}
           {tab === 'vote' && (
             <div>
-              <p style={{ fontSize: '13px', color: '#94a3b8', marginBottom: '16px' }}>Vote on suggestions. Top-voted ideas get built next.</p>
+              <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '16px' }}>Vote on suggestions. Top-voted ideas get built next.</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {[...list].sort((a, b) => b.votes - a.votes).map((s) => (
-                  <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 16px', background: s.voted ? 'rgba(99,102,241,0.06)' : 'rgba(255,255,255,0.02)', border: s.voted ? '1px solid rgba(99,102,241,0.2)' : '1px solid rgba(255,255,255,0.06)', borderRadius: '12px' }}>
-                    <button onClick={() => vote(s.id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px', padding: '8px 12px', minWidth: '52px', background: s.voted ? 'rgba(99,102,241,0.2)' : 'rgba(255,255,255,0.04)', border: s.voted ? '1px solid rgba(99,102,241,0.4)' : '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', cursor: s.voted ? 'default' : 'pointer', flexShrink: 0 }}>
+                  <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 16px', background: s.voted ? 'rgba(99,102,241,0.06)' : 'var(--surface-2)', border: s.voted ? '1px solid rgba(99,102,241,0.2)' : '1px solid var(--border)', borderRadius: '12px' }}>
+                    <button onClick={() => vote(s.id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px', padding: '8px 12px', minWidth: '52px', background: s.voted ? 'rgba(99,102,241,0.2)' : 'var(--surface)', border: s.voted ? '1px solid rgba(99,102,241,0.4)' : '1px solid var(--border)', borderRadius: '10px', cursor: s.voted ? 'default' : 'pointer', flexShrink: 0 }}>
                       <span style={{ fontSize: '14px' }}>{s.voted ? '✅' : '▲'}</span>
-                      <span style={{ fontSize: '13px', fontWeight: 700, color: s.voted ? '#a5b4fc' : '#94a3b8' }}>{s.votes}</span>
+                      <span style={{ fontSize: '13px', fontWeight: 700, color: s.voted ? 'var(--primary)' : 'var(--text-muted)' }}>{s.votes}</span>
                     </button>
                     <div style={{ flex: 1 }}>
-                      <p style={{ fontSize: '13px', color: '#f8fafc', fontWeight: 500, lineHeight: '1.5', marginBottom: '4px' }}>{s.text}</p>
+                      <p style={{ fontSize: '13px', color: 'var(--text)', fontWeight: 500, lineHeight: '1.5', marginBottom: '4px' }}>{s.text}</p>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <span style={{ fontSize: '10px', background: 'rgba(99,102,241,0.15)', color: '#a5b4fc', padding: '2px 8px', borderRadius: '99px' }}>{s.category}</span>
-                        <span style={{ fontSize: '11px', color: '#475569' }}>{s.time}</span>
+                        <span style={{ fontSize: '10px', background: 'rgba(99,102,241,0.1)', color: 'var(--primary)', padding: '2px 8px', borderRadius: '99px' }}>{s.category}</span>
+                        <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{s.time}</span>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
-              <p style={{ fontSize: '11px', color: '#475569', textAlign: 'center', marginTop: '16px' }}>Have a new idea? Switch to the Suggest tab.</p>
+              <p style={{ fontSize: '11px', color: 'var(--text-muted)', textAlign: 'center', marginTop: '16px' }}>Have a new idea? Switch to the Suggest tab.</p>
             </div>
           )}
 
@@ -292,8 +296,8 @@ export default function FeedbackSection() {
               {!rated && (
                 <div>
                   <div style={{ fontSize: '48px', marginBottom: '16px' }}>🌟</div>
-                  <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '8px' }}>How would you rate AssetForge Labs?</h3>
-                  <p style={{ color: '#94a3b8', fontSize: '14px', marginBottom: '28px' }}>Your honest rating helps us improve</p>
+                  <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '8px', color: 'var(--text)' }}>How would you rate AssetForge Labs?</h3>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '28px' }}>Your honest rating helps us improve</p>
 
                   <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '12px' }}>
                     {[1, 2, 3, 4, 5].map((n) => (
@@ -304,12 +308,12 @@ export default function FeedbackSection() {
                     ))}
                   </div>
 
-                  <p style={{ fontSize: '13px', color: '#64748b', minHeight: '20px' }}>
+                  <p style={{ fontSize: '13px', color: 'var(--text-muted)', minHeight: '20px' }}>
                     {hover > 0 ? STARS_TEXT[hover] : 'Click a star to rate'}
                   </p>
 
-                  <div style={{ marginTop: '32px', padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.07)' }}>
-                    <p style={{ fontSize: '13px', color: '#94a3b8', marginBottom: '12px' }}>Love it? Share with other creators:</p>
+                  <div style={{ marginTop: '32px', padding: '16px', background: 'var(--surface-2)', borderRadius: '12px', border: '1px solid var(--border)' }}>
+                    <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '12px' }}>Love it? Share with other creators:</p>
                     <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
                       {/* Official Instagram Logo */}
                       <a 
@@ -360,10 +364,10 @@ export default function FeedbackSection() {
               {rated && (
                 <div>
                   <div style={{ fontSize: '56px', marginBottom: '16px' }}>{stars >= 4 ? '🤩' : stars === 3 ? '😊' : '🙏'}</div>
-                  <h3 style={{ fontSize: '22px', fontWeight: 700, color: '#10b981', marginBottom: '8px' }}>
+                  <h3 style={{ fontSize: '22px', fontWeight: 700, color: 'var(--success)', marginBottom: '8px' }}>
                     {stars >= 4 ? 'You just made our day!' : 'Thanks for being honest!'}
                   </h3>
-                  <p style={{ color: '#94a3b8', fontSize: '14px', marginBottom: '16px' }}>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '16px' }}>
                     {'You rated us ' + String(stars) + '/5 stars.'}
                     {stars < 4 ? ' We will work hard to earn that 5th star!' : ''}
                   </p>
@@ -381,7 +385,7 @@ export default function FeedbackSection() {
         </div>
       </div>
 
-      <p style={{ textAlign: 'center', fontSize: '12px', color: '#374151', marginTop: '20px' }}>
+      <p style={{ textAlign: 'center', fontSize: '12px', color: 'var(--text-muted)', marginTop: '20px' }}>
         Built in Rajkot, India — Loved by creators worldwide
       </p>
 
