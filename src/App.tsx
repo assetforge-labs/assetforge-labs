@@ -236,7 +236,7 @@ function App() {
             { step: '03', icon: '⚡', title: 'Download Package', desc: 'One click generates a structured ZIP with SEO metadata, README and marketplace listing — ready to upload.' },
           ].map((s) => (
             <div key={s.step} style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px', padding: '24px', position: 'relative', transition: 'background-color 0.4s ease, border-color 0.4s ease' }}>
-              <span style={{ position: 'absolute', top: '16px', right: '16px', fontSize: '11px', fontWeight: 800, color: 'var(--border)', letterSpacing: '0.05em' }}>{s.step}</span>
+              <span style={{ position: 'absolute', top: '16px', right: '16px', fontSize: '11px', fontWeight: 800, color: '#475569', letterSpacing: '0.05em' }}>{s.step}</span>
               <div style={{ fontSize: '32px', marginBottom: '12px' }}>{s.icon}</div>
               <h3 style={{ fontWeight: 700, fontSize: '15px', marginBottom: '8px', color: 'var(--text)', transition: 'color 0.4s ease' }}>{s.title}</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '13px', lineHeight: '1.6', transition: 'color 0.4s ease' }}>{s.desc}</p>
