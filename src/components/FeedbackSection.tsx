@@ -159,7 +159,7 @@ export default function FeedbackSection() {
     <section style={{ padding: '80px 24px', maxWidth: '760px', margin: '0 auto' }}>
 
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: 'var(--primary)', marginBottom: '16px' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: '#4338ca', marginBottom: '16px', fontWeight: '600' }}>
           🧠 Built with creators, for creators
         </div>
         <h2 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '12px', color: 'var(--text)' }}>You Shape AssetForge Labs</h2>
