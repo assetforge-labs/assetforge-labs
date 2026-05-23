@@ -138,7 +138,7 @@ export default function FeedbackSection() {
       color: on ? '#4338ca' : '#334155',
       fontSize: '13px', fontWeight: on ? 600 : 400, cursor: 'pointer',
     }
-  }
+  } //
 
   // ✅ FIXED: High Contrast Colors for Accessibility
   function pillSt(on: boolean): React.CSSProperties {
@@ -148,7 +148,7 @@ export default function FeedbackSection() {
       background: on ? 'rgba(99,102,241,0.1)' : 'var(--surface-2)',
       color: on ? '#4338ca' : '#334155', cursor: 'pointer',
     }
-  }
+  } //
 
   const ratingTweetUrl =
     'https://twitter.com/intent/tweet?text=Just+rated+AssetForge+Labs+' +
