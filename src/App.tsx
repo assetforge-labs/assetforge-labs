@@ -112,14 +112,15 @@ function App() {
       </section>
 
       {/* Main App Container */}
-      <section style={{ maxWidth: '760px', margin: '0 auto', padding: '0 24px 80px' }}>
+      <main style={{ maxWidth: '760px', margin: '0 auto', padding: '0 24px 80px' }}>
 
         {/* Product Name Form Input */}
         <div style={{ marginBottom: '16px' }}>
-          <label style={{ display: 'block', fontSize: '13px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>
+          <label htmlFor="product-name-input" style={{ display: 'block', fontSize: '13px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>
             Product Name
           </label>
           <input
+            id="product-name-input"
             type="text"
             placeholder="e.g. Procreate Watercolour Brush Pack Vol.1"
             value={productName}
@@ -218,7 +219,7 @@ function App() {
             ⚠️ {zipper.error}
           </div>
         )}
-      </section>
+      </main>
 
       {/* Instructional Walkthrough Layer */}
       <section style={{ padding: '60px 32px', maxWidth: '760px', margin: '0 auto' }}>
@@ -274,7 +275,7 @@ function App() {
           ))}
         </div>
       </section>
-       
+        
       {/* Community Creator Feedback Board */}
       <FeedbackSection />
 
@@ -295,6 +296,7 @@ function App() {
         <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '24px' }}>
           <a 
             href="https://www.instagram.com/assetforgelabs/" 
+            aria-label="Instagram"
             target="_blank" 
             rel="noopener noreferrer" 
             style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} 
@@ -307,6 +309,7 @@ function App() {
           </a>
           <a 
             href="https://x.com/AssetForgeLabs" 
+            aria-label="X (Twitter)"
             target="_blank" 
             rel="noopener noreferrer" 
             style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} 
@@ -319,6 +322,7 @@ function App() {
           </a>
           <a 
             href="https://www.linkedin.com/in/assetforge-labs-914536410" 
+            aria-label="LinkedIn"
             target="_blank" 
             rel="noopener noreferrer" 
             style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} 
