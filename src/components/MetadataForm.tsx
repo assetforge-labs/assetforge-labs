@@ -116,7 +116,7 @@ export default function MetadataForm({ productName, onMetadataGenerated, isPro }
               >
                 <div style={{ fontSize: '20px', marginBottom: '4px' }}>{cat.icon}</div>
                 <div style={{ fontWeight: '600', marginBottom: '2px' }}>{cat.label}</div>
-                <div style={{ fontSize: '9px', color: category === cat.value ? '#4338ca' : '#475569', fontWeight: '500' }}>{cat.platform}</div>
+                <div style={{ fontSize: '9px', fontWeight: '500', color: category === cat.value ? '#4338ca' : '#475569' }}>{cat.platform}</div>
               </button>
             ))}
           </div>
