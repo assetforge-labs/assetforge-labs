@@ -7,7 +7,7 @@ export default function LaunchBadges() {
       
     
       {/* 2. PASTE YOUR CONVERTED SHIPIT CODE EXACTLY BELOW THIS LINE */}
-        <a href="https://www.shipit.buzz/products/assetforge-labs?ref=badge" target="_blank" rel="noopener noreferrer"><img src="https://www.shipit.buzz/api/products/assetforge-labs/badge?theme=dark" alt="Featured on Shipit" /></a>
+        <a href="https://www.shipit.buzz/products/assetforge-labs?ref=badge" target="_blank" rel="noopener noreferrer"><img src="https://www.shipit.buzz/api/products/assetforge-labs/badge?theme=dark" alt="Featured on Shipit" width="250" height="54" /></a>
       
 
     </div>
