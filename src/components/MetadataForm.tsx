@@ -105,9 +105,9 @@ export default function MetadataForm({ productName, onMetadataGenerated, isPro }
                 style={{
                   padding: '10px 8px',
                   borderRadius: '10px',
-                  border: category === cat.value ? '1px solid #6366f1' : '1px solid var(--border)',
+                  border: category === cat.value ? '1px solid #4f46e5' : '1px solid var(--border)',
                   background: category === cat.value ? 'rgba(99,102,241,0.15)' : 'var(--surface-2)',
-                  color: category === cat.value ? '#6366f1' : 'var(--text-muted)',
+                  color: category === cat.value ? '#4338ca' : '#334155',
                   fontSize: '11px',
                   cursor: 'pointer',
                   textAlign: 'center',
@@ -116,7 +116,7 @@ export default function MetadataForm({ productName, onMetadataGenerated, isPro }
               >
                 <div style={{ fontSize: '20px', marginBottom: '4px' }}>{cat.icon}</div>
                 <div style={{ fontWeight: '600', marginBottom: '2px' }}>{cat.label}</div>
-                <div style={{ fontSize: '9px', opacity: 0.6 }}>{cat.platform}</div>
+                <div style={{ fontSize: '9px', color: category === cat.value ? '#4338ca' : '#475569', fontWeight: '500' }}>{cat.platform}</div>
               </button>
             ))}
           </div>
