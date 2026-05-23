@@ -129,24 +129,24 @@ export default function FeedbackSection() {
     try { localStorage.setItem('afl_r', String(n)) } catch { /* ignore */ }
   }
 
-  // ✅ FIXED: Using CSS variables
+  // ✅ FIXED: High Contrast Colors for Accessibility
   function tabSt(on: boolean): React.CSSProperties {
     return {
       padding: '8px 18px', borderRadius: '8px', border: 'none',
-      borderBottom: on ? '2px solid var(--primary)' : '2px solid transparent',
+      borderBottom: on ? '2px solid #4338ca' : '2px solid transparent',
       background: on ? 'rgba(99,102,241,0.1)' : 'transparent',
-      color: on ? 'var(--primary)' : 'var(--text-muted)',
+      color: on ? '#4338ca' : '#334155',
       fontSize: '13px', fontWeight: on ? 600 : 400, cursor: 'pointer',
     }
   }
 
-  // ✅ FIXED: Using CSS variables
+  // ✅ FIXED: High Contrast Colors for Accessibility
   function pillSt(on: boolean): React.CSSProperties {
     return {
       padding: '6px 14px', borderRadius: '99px', fontSize: '12px',
-      border: on ? '1px solid var(--primary)' : '1px solid var(--border)',
+      border: on ? '1px solid #4338ca' : '1px solid var(--border)',
       background: on ? 'rgba(99,102,241,0.1)' : 'var(--surface-2)',
-      color: on ? 'var(--primary)' : 'var(--text-muted)', cursor: 'pointer',
+      color: on ? '#4338ca' : '#334155', cursor: 'pointer',
     }
   }
 
