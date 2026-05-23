@@ -151,6 +151,7 @@ export default function MetadataForm({ productName, onMetadataGenerated, isPro }
           <label style={labelStyle}>License terms</label>
           <input
             type="text"
+            aria-label="License Terms"
             value={license}
             onChange={(e) => setLicense(e.target.value)}
             style={inputStyle}
