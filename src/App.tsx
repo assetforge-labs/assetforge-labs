@@ -97,6 +97,7 @@ function App() {
             </span>
           ))}
         </div>
+        <LaunchBadges />
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: '32px', flexWrap: 'wrap' }}>
           {[
