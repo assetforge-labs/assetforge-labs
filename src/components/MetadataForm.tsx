@@ -92,7 +92,6 @@ export default function MetadataForm({ productName, onMetadataGenerated, isPro }
       </div>
 
       <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px', transition: 'background-color 0.4s ease, border-color 0.4s ease' }}>
-
         <div>
           <label style={labelStyle}>What type of asset are you selling?</label>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '8px' }}>
