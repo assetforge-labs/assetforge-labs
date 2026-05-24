@@ -41,9 +41,6 @@ const STARS_TEXT: Record<number, string> = {
   5: 'Amazing — absolutely love it! 🔥',
 }
 
-const TW = 'https://twitter.com/intent/tweet?text=Just+found+AssetForge+Labs+%E2%80%94+best+digital+asset+packager+for+creators!+AI-powered+%26+100%25+browser-based+%F0%9F%94%A5&url=https://assetforgelabs.com'
-const LI = 'https://www.linkedin.com/sharing/share-offsite/?url=https://assetforgelabs.com'
-
 const inputBase: React.CSSProperties = {
   width: '100%',
   padding: '10px 14px',
@@ -101,7 +98,6 @@ export default function FeedbackSection() {
         body: JSON.stringify({
           access_key: '0cd76dea-5efc-4afb-b4b2-5bccaca5d4ec',
           subject: 'New Suggestion — AssetForge Labs',
-          from_name: 'AssetForge Labs Feedback',
           suggestion: text,
           category: cat,
           user_email: email || 'Anonymous',
@@ -147,14 +143,9 @@ export default function FeedbackSection() {
     }
   }
 
-  const ratingTweetUrl = 'https://twitter.com/intent/tweet?text=Just+rated+AssetForge+Labs+' + String(stars) + '%2F5+stars!+Best+digital+asset+packager+for+creators+%F0%9F%94%A5&url=https://assetforgelabs.com'
-
   return (
     <section style={{ padding: '80px 24px', maxWidth: '760px', margin: '0 auto' }}>
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: '#4338ca', marginBottom: '16px', fontWeight: '600' }}>
-          🧠 Built with creators, for creators
-        </div>
         <h2 style={{ fontSize: '32px', fontWeight: '800', marginBottom: '12px', color: 'var(--text)' }}>You Shape AssetForge Labs</h2>
       </div>
 
@@ -168,8 +159,7 @@ export default function FeedbackSection() {
         <div style={{ padding: '24px' }}>
           {tab === 'suggest' && sent && (
             <div style={{ textAlign: 'center', padding: '32px 0' }}>
-              <div style={{ fontSize: '56px', marginBottom: '16px' }}>🎉</div>
-              <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '8px', color: 'var(--success)' }}>Thank you!</h3>
+              <h3 style={{ fontSize: '20px', fontWeight: '700', color: 'var(--success)' }}>Thank you!</h3>
             </div>
           )}
           {tab === 'suggest' && !sent && (
@@ -180,10 +170,10 @@ export default function FeedbackSection() {
           )}
           {tab === 'vote' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {[...list].sort((a,b) => b.votes - a.votes).map((s) => (
+              {[...list].sort((a, b) => b.votes - a.votes).map((s) => (
                 <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 16px', background: 'var(--surface-2)', borderRadius: '12px' }}>
-                   <button onClick={() => vote(s.id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>▲ {s.votes}</button>
-                   <p style={{ fontSize: '13px' }}>{s.text}</p>
+                  <button onClick={() => vote(s.id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>▲ {s.votes}</button>
+                  <p style={{ fontSize: '13px' }}>{s.text}</p>
                 </div>
               ))}
             </div>
