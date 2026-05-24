@@ -70,7 +70,7 @@ function App() {
       <section className="fade-in" style={{ textAlign: 'center', padding: '72px 24px 48px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: '#6366f1', marginBottom: '24px', textAlign: 'left' }}>
           <span className="pulse-dot" style={{ width: '8px', height: '8px', minWidth: '8px', minHeight: '8px', borderRadius: '50%', background: '#6366f1', display: 'inline-block', flexShrink: 0 }} />
-          <span>World's First Digital asset packaging tool for creators selling on Etsy, Gumroad, Creative Market & more+</span>
+          <span>World&apos;s First Digital asset packaging tool for creators selling on Etsy, Gumroad, Creative Market & more+</span>
         </div>
         <h1 style={{ fontSize: 'clamp(32px, 6vw, 64px)', fontWeight: '800', lineHeight: '1.1', marginBottom: '20px' }}>
           Package. Optimize. Sell.<br />
@@ -206,7 +206,7 @@ function App() {
       </main>
 
       <section style={{ padding: '60px 32px', maxWidth: '760px', margin: '0 auto' }}>
-        <h2 style={{ fontSize: '28px', fontWeight: 800, textAlign: 'center', marginBottom: '8px' }}>
+        <h2 style={{ fontSize: '28px', fontWeight: '800', textAlign: 'center', marginBottom: '8px' }}>
           Ready in 3 simple steps
         </h2>
         <p style={{ color: 'var(--text-muted)', textAlign: 'center', fontSize: '15px', marginBottom: '40px', transition: 'color 0.4s ease' }}>
@@ -221,7 +221,7 @@ function App() {
             <div key={s.step} style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px', padding: '24px', position: 'relative', transition: 'background-color 0.4s ease, border-color 0.4s ease' }}>
               <span style={{ position: 'absolute', top: '16px', right: '16px', fontSize: '11px', fontWeight: '800', color: '#475569', letterSpacing: '0.05em' }}>{s.step}</span>
               <div style={{ fontSize: '32px', marginBottom: '12px' }}>{s.icon}</div>
-              <h3 style={{ fontWeight: 700, fontSize: '15px', marginBottom: '8px', color: 'var(--text)', transition: 'color 0.4s ease' }}>{s.title}</h3>
+              <h3 style={{ fontWeight: '700', fontSize: '15px', marginBottom: '8px', color: 'var(--text)', transition: 'color 0.4s ease' }}>{s.title}</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '13px', lineHeight: '1.6', transition: 'color 0.4s ease' }}>{s.desc}</p>
             </div>
           ))}
@@ -262,7 +262,7 @@ function App() {
 
       <footer style={{ borderTop: '1px solid var(--border)', padding: '40px 32px', textAlign: 'center', transition: 'border-color 0.4s ease' }}>
         <div style={{ fontWeight: '800', fontSize: '18px', marginBottom: '8px' }}>AssetForge Labs</div>
-        <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '20px', transition: 'color 0.4s ease' }}>The world's most advanced digital asset packager</p>
+        <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '20px', transition: 'color 0.4s ease' }}>The world&apos;s most advanced digital asset packager</p>
         
         <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', fontSize: '13px', color: 'var(--text-muted)', flexWrap: 'wrap', marginBottom: '24px' }}>
           <a href="/privacy.html" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Privacy Policy</a>
