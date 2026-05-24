@@ -12,10 +12,8 @@ import MarketplacePreviewPanel from './components/MarketplacePreviewPanel'
 import ListingScore from './components/ListingScore'
 
 function App() {
-  // 1. HARDCODE PRO STATUS TO TRUE (Unlocks everything for everyone)
   const isPro = true
 
-  // 2. INITIALIZE HOOKS
   const ingestion = useFileIngestion(isPro)
   const zipper    = useZipGenerator()
   
@@ -31,7 +29,6 @@ function App() {
   return (
     <div style={{ backgroundColor: 'var(--bg)', color: 'var(--text)', minHeight: '100vh', fontFamily: 'Inter, sans-serif', transition: 'background-color 0.4s ease, color 0.4s ease' }}>
 
-      {/* Sticky Navbar */}
       <nav style={{ 
         display: 'flex', 
         alignItems: 'center', 
@@ -70,7 +67,6 @@ function App() {
         </div>
       </nav>
 
-      {/* Hero */}
       <section className="fade-in" style={{ textAlign: 'center', padding: '72px 24px 48px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: '#6366f1', marginBottom: '24px', textAlign: 'left' }}>
           <span className="pulse-dot" style={{ width: '8px', height: '8px', minWidth: '8px', minHeight: '8px', borderRadius: '50%', background: '#6366f1', display: 'inline-block', flexShrink: 0 }} />
@@ -84,7 +80,6 @@ function App() {
           The only tool that packages your files, analyzes your market instantly, shows a live marketplace preview, and scores your SEO — all 100% free, no uploads, no servers.
         </p>
 
-        {/* Unique feature badges */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap', marginBottom: '32px' }}>
           {[
             { label: '🧠 Smart Analyzer', color: '#10b981' },
@@ -111,10 +106,8 @@ function App() {
         
       </section>
 
-      {/* Main App Container */}
       <main style={{ maxWidth: '760px', margin: '0 auto', padding: '0 24px 80px' }}>
 
-        {/* Product Name Form Input */}
         <div style={{ marginBottom: '16px' }}>
           <label htmlFor="product-name-input" style={{ display: 'block', fontSize: '13px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>
             Product Name
@@ -129,10 +122,8 @@ function App() {
           />
         </div>
 
-        {/* Drop Zone Component Module */}
         <DragDropZone ingestion={ingestion} />
 
-        {/* Listing Health Score Widget */}
         <ListingScore
           productName={productName}
           description={fullDescription}
@@ -141,27 +132,23 @@ function App() {
           hasAIContent={false}
         />
 
-        {/* Smart Market Analyzer Panel */}
         <SmartAnalyzer
           files={ingestion.files}
           productName={productName}
         />
 
-        {/* SEO Metadata Form Processor */}
         <MetadataForm
           productName={productName}
           onMetadataGenerated={(md) => setMetadata(md)}
           isPro={isPro}
         />
 
-        {/* Live Marketplace UI Sandbox */}
         <MarketplacePreviewPanel
           productName={productName}
           description={fullDescription}
           fileCount={ingestion.files.length}
         />
 
-        {/* Core Generator Action Interface */}
         {ingestion.files.length > 0 && !zipper.isGenerating && !zipper.isDone && (
           <button
             className="fade-in"
@@ -180,7 +167,6 @@ function App() {
           </button>
         )}
 
-        {/* Local Compression Progress Array */}
         {zipper.isGenerating && (
           <div className="fade-in" style={{ marginTop: '20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', color: 'var(--text-muted)', marginBottom: '8px' }}>
@@ -194,7 +180,6 @@ function App() {
           </div>
         )}
 
-        {/* Complete Success Interface Deployment Block */}
         {zipper.isDone && (
           <div className="fade-in" style={{ marginTop: '20px', padding: '28px', background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.25)', borderRadius: '16px', textAlign: 'center' }}>
             <div style={{ fontSize: '48px', marginBottom: '8px' }}>🎉</div>
@@ -213,7 +198,6 @@ function App() {
           </div>
         )}
 
-        {/* Runtime Exception Notification Box */}
         {zipper.error && (
           <div style={{ marginTop: '16px', padding: '14px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: '10px', color: '#f87171', fontSize: '14px' }}>
             ⚠️ {zipper.error}
@@ -221,7 +205,6 @@ function App() {
         )}
       </main>
 
-      {/* Instructional Walkthrough Layer */}
       <section style={{ padding: '60px 32px', maxWidth: '760px', margin: '0 auto' }}>
         <h2 style={{ fontSize: '28px', fontWeight: 800, textAlign: 'center', marginBottom: '8px' }}>
           Ready in 3 simple steps
@@ -236,7 +219,7 @@ function App() {
             { step: '03', icon: '⚡', title: 'Download Package', desc: 'One click generates a structured ZIP with SEO metadata, README and marketplace listing — ready to upload.' },
           ].map((s) => (
             <div key={s.step} style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px', padding: '24px', position: 'relative', transition: 'background-color 0.4s ease, border-color 0.4s ease' }}>
-              <span style={{ position: 'absolute', top: '16px', right: '16px', fontSize: '11px', fontWeight: 800, color: '#475569', letterSpacing: '0.05em' }}>{s.step}</span>
+              <span style={{ position: 'absolute', top: '16px', right: '16px', fontSize: '11px', fontWeight: '800', color: '#475569', letterSpacing: '0.05em' }}>{s.step}</span>
               <div style={{ fontSize: '32px', marginBottom: '12px' }}>{s.icon}</div>
               <h3 style={{ fontWeight: 700, fontSize: '15px', marginBottom: '8px', color: 'var(--text)', transition: 'color 0.4s ease' }}>{s.title}</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '13px', lineHeight: '1.6', transition: 'color 0.4s ease' }}>{s.desc}</p>
@@ -245,7 +228,6 @@ function App() {
         </div>
       </section>
 
-      {/* Feature Highlighting Grid Layout */}
       <section id="features" style={{ padding: '80px 32px', maxWidth: '960px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
           <h2 style={{ fontSize: '36px', fontWeight: '800', marginBottom: '12px' }}>
@@ -276,15 +258,12 @@ function App() {
         </div>
       </section>
         
-      {/* Community Creator Feedback Board */}
       <FeedbackSection />
 
-      {/* Application Footer Element */}
       <footer style={{ borderTop: '1px solid var(--border)', padding: '40px 32px', textAlign: 'center', transition: 'border-color 0.4s ease' }}>
         <div style={{ fontWeight: '800', fontSize: '18px', marginBottom: '8px' }}>AssetForge Labs</div>
         <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '20px', transition: 'color 0.4s ease' }}>The world's most advanced digital asset packager</p>
         
-        {/* Legal & Contact Links */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', fontSize: '13px', color: 'var(--text-muted)', flexWrap: 'wrap', marginBottom: '24px' }}>
           <a href="/privacy.html" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Privacy Policy</a>
           <a href="/terms.html" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Terms of Service</a>
@@ -292,7 +271,6 @@ function App() {
           <a href="mailto:assetforgelabs@gmail.com" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Contact Us</a>
         </div>
 
-        {/* Social Media Logos */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '24px' }}>
           <a 
             href="https://www.instagram.com/assetforgelabs/" 
