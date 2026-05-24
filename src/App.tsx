@@ -1,29 +1,28 @@
 import LaunchBadges from './components/LaunchBadges';
-import ThemeToggle from './ThemeToggle'
-import FeedbackSection from './components/FeedbackSection'
-import './index.css'
-import { useState } from 'react'
-import { useFileIngestion } from './hooks/useFileIngestion'
-import { useZipGenerator } from './hooks/useZipGenerator'
-import DragDropZone from './components/DragDropZone'
-import MetadataForm from './components/MetadataForm'
-import SmartAnalyzer from './components/SmartAnalyzer'
-import MarketplacePreviewPanel from './components/MarketplacePreviewPanel'
-import ListingScore from './components/ListingScore'
+import ThemeToggle from './ThemeToggle';
+import FeedbackSection from './components/FeedbackSection';
+import './index.css';
+import { useState } from 'react';
+import { useFileIngestion } from './hooks/useFileIngestion';
+import { useZipGenerator } from './hooks/useZipGenerator';
+import DragDropZone from './components/DragDropZone';
+import MetadataForm from './components/MetadataForm';
+import SmartAnalyzer from './components/SmartAnalyzer';
+import MarketplacePreviewPanel from './components/MarketplacePreviewPanel';
+import ListingScore from './components/ListingScore';
 
 function App() {
-  const isPro = true
-
-  const ingestion = useFileIngestion(isPro)
-  const zipper    = useZipGenerator()
+  const isPro = true;
+  const ingestion = useFileIngestion(isPro);
+  const zipper = useZipGenerator();
   
-  const [productName, setProductName] = useState('')
-  const [metadata, setMetadata] = useState('')
+  const [productName, setProductName] = useState('');
+  const [metadata, setMetadata] = useState('');
 
-  const fullDescription = metadata
+  const fullDescription = metadata;
 
   async function handleGenerate() {
-    await zipper.generate(ingestion.files, productName, metadata)
+    await zipper.generate(ingestion.files, productName, metadata);
   }
 
   return (
@@ -70,7 +69,7 @@ function App() {
       <section className="fade-in" style={{ textAlign: 'center', padding: '72px 24px 48px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: '#6366f1', marginBottom: '24px', textAlign: 'left' }}>
           <span className="pulse-dot" style={{ width: '8px', height: '8px', minWidth: '8px', minHeight: '8px', borderRadius: '50%', background: '#6366f1', display: 'inline-block', flexShrink: 0 }} />
-          <span>World&apos;s First Digital asset packaging tool for creators selling on Etsy, Gumroad, Creative Market & more+</span>
+          <span>World&apos;s First Digital asset packaging tool for creators selling on Etsy, Gumroad, Creative Market &amp; more+</span>
         </div>
         <h1 style={{ fontSize: 'clamp(32px, 6vw, 64px)', fontWeight: '800', lineHeight: '1.1', marginBottom: '20px' }}>
           Package. Optimize. Sell.<br />
@@ -103,7 +102,6 @@ function App() {
           ))}
         </div>
         <LaunchBadges />
-        
       </section>
 
       <main style={{ maxWidth: '760px', margin: '0 auto', padding: '0 24px 80px' }}>
@@ -192,7 +190,7 @@ function App() {
                 onClick={() => { zipper.reset(); ingestion.clearAll(); setProductName(''); setMetadata('') }}
                 style={{ padding: '10px 20px', background: 'none', border: '1px solid rgba(16,185,129,0.4)', borderRadius: '8px', color: '#10b981', fontSize: '14px', cursor: 'pointer', fontWeight: '600' }}
               >
-                Package another →
+                Package another &rarr;
               </button>
             </div>
           </div>
@@ -267,7 +265,7 @@ function App() {
         <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', fontSize: '13px', color: 'var(--text-muted)', flexWrap: 'wrap', marginBottom: '24px' }}>
           <a href="/privacy.html" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Privacy Policy</a>
           <a href="/terms.html" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Terms of Service</a>
-          <a href="/refund.html" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Cancellation & Refund Policy</a>
+          <a href="/refund.html" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Cancellation &amp; Refund Policy</a>
           <a href="mailto:assetforgelabs@gmail.com" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Contact Us</a>
         </div>
 
@@ -320,4 +318,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
