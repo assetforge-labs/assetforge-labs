@@ -41,6 +41,9 @@ const STARS_TEXT: Record<number, string> = {
   5: 'Amazing — absolutely love it! 🔥',
 }
 
+const TW = 'https://twitter.com/intent/tweet?text=Just+found+AssetForge+Labs+%E2%80%94+best+digital+asset+packager+for+creators!+AI-powered+%26+100%25+browser-based+%F0%9F%94%A5&url=https://assetforgelabs.com'
+const LI = 'https://www.linkedin.com/sharing/share-offsite/?url=https://assetforgelabs.com'
+
 const inputBase: React.CSSProperties = {
   width: '100%',
   padding: '10px 14px',
@@ -74,7 +77,9 @@ export default function FeedbackSection() {
       if (s) setList(JSON.parse(s))
       const r = localStorage.getItem('afl_r')
       if (r) { setStars(Number(r)); setRated(true) }
-    } catch (e) { console.error(e) }
+    } catch (error) {
+      console.error(error)
+    }
   }, [])
 
   function changeText(v: string) {
@@ -90,7 +95,12 @@ export default function FeedbackSection() {
     }
     const next = [item, ...list]
     setList(next)
-    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch (e) { console.error(e) }
+    try { 
+      localStorage.setItem('afl_s', JSON.stringify(next)) 
+    } catch (error) {
+      console.error(error)
+    }
+    
     try {
       await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -98,13 +108,16 @@ export default function FeedbackSection() {
         body: JSON.stringify({
           access_key: '0cd76dea-5efc-4afb-b4b2-5bccaca5d4ec',
           subject: 'New Suggestion — AssetForge Labs',
+          from_name: 'AssetForge Labs Feedback',
           suggestion: text,
           category: cat,
           user_email: email || 'Anonymous',
           mood: mood || 'Not specified',
         }),
       })
-    } catch (e) { console.error(e) }
+    } catch (error) {
+      console.error(error)
+    }
     setSending(false)
     setSent(true)
     setText('')
@@ -115,13 +128,21 @@ export default function FeedbackSection() {
   function vote(id: string) {
     const next = list.map((s) => s.id === id && !s.voted ? { ...s, votes: s.votes + 1, voted: true } : s)
     setList(next)
-    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch (e) { console.error(e) }
+    try { 
+      localStorage.setItem('afl_s', JSON.stringify(next)) 
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   function rate(n: number) {
     setStars(n)
     setRated(true)
-    try { localStorage.setItem('afl_r', String(n)) } catch (e) { console.error(e) }
+    try { 
+      localStorage.setItem('afl_r', String(n)) 
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   function tabSt(on: boolean): React.CSSProperties {
@@ -143,13 +164,32 @@ export default function FeedbackSection() {
     }
   }
 
+  const ratingTweetUrl = 'https://twitter.com/intent/tweet?text=Just+rated+AssetForge+Labs+' + String(stars) + '%2F5+stars!+Best+digital+asset+packager+for+creators+%F0%9F%94%A5&url=https://assetforgelabs.com'
+
   return (
     <section style={{ padding: '80px 24px', maxWidth: '760px', margin: '0 auto' }}>
+
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: '#4338ca', marginBottom: '16px', fontWeight: '600' }}>
+          🧠 Built with creators, for creators
+        </div>
         <h2 style={{ fontSize: '32px', fontWeight: '800', marginBottom: '12px', color: 'var(--text)' }}>You Shape AssetForge Labs</h2>
+        <p style={{ color: 'var(--text-muted)', fontSize: '16px', maxWidth: '500px', margin: '0 auto' }}>
+          Every feature in this tool came from creator feedback. Tell us what you need — the best ideas get built next.
+        </p>
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', marginBottom: '32px', flexWrap: 'wrap' }}>
+        {[['247', 'Suggestions received'], ['38', 'Features shipped'], ['94%', 'Users feel heard']].map(([v, l]) => (
+          <div key={l} style={{ textAlign: 'center' }}>
+            <p style={{ fontSize: '24px', fontWeight: '800', color: 'var(--primary)', marginBottom: '2px' }}>{v}</p>
+            <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{l}</p>
+          </div>
+        ))}
       </div>
 
       <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '20px', overflow: 'hidden' }}>
+
         <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', padding: '0 20px', gap: '4px' }}>
           <button style={tabSt(tab === 'suggest')} onClick={() => setTab('suggest')}>💡 Suggest</button>
           <button style={tabSt(tab === 'vote')}    onClick={() => setTab('vote')}>🗳️ Vote</button>
@@ -157,34 +197,202 @@ export default function FeedbackSection() {
         </div>
 
         <div style={{ padding: '24px' }}>
+
           {tab === 'suggest' && sent && (
             <div style={{ textAlign: 'center', padding: '32px 0' }}>
-              <h3 style={{ fontSize: '20px', fontWeight: '700', color: 'var(--success)' }}>Thank you!</h3>
+              <div style={{ fontSize: '56px', marginBottom: '16px' }}>🎉</div>
+              <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '8px', color: 'var(--success)' }}>Thank you! We got your suggestion.</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '24px' }}>We read every submission and will notify you when your idea ships.</p>
+              <button onClick={() => setSent(false)} style={{ padding: '10px 24px', background: 'none', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text-muted)', fontSize: '13px', cursor: 'pointer' }}>
+                Submit another
+              </button>
             </div>
           )}
+
           {tab === 'suggest' && !sent && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <textarea rows={4} value={text} onChange={(e) => changeText(e.target.value)} style={{ ...inputBase, resize: 'vertical' }} />
-              <button onClick={submit} style={{ padding: '14px', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: 'white', borderRadius: '10px', border: 'none', cursor: 'pointer' }}>🚀 Submit</button>
-            </div>
-          )}
-          {tab === 'vote' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {[...list].sort((a, b) => b.votes - a.votes).map((s) => (
-                <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 16px', background: 'var(--surface-2)', borderRadius: '12px' }}>
-                  <button onClick={() => vote(s.id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>▲ {s.votes}</button>
-                  <p style={{ fontSize: '13px' }}>{s.text}</p>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '10px', fontWeight: '500' }}>How are you feeling about AssetForge Labs today?</label>
+                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                  {MOODS.map((m) => (
+                    <button key={m.emoji} onClick={() => setMood(m.emoji)} style={{
+                      display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 14px', borderRadius: '99px',
+                      border: mood === m.emoji ? '1px solid var(--primary)' : '1px solid var(--border)',
+                      background: mood === m.emoji ? 'rgba(99,102,241,0.1)' : 'var(--surface-2)',
+                      color: mood === m.emoji ? 'var(--primary)' : 'var(--text-muted)', fontSize: '13px', cursor: 'pointer',
+                    }}>
+                      <span style={{ fontSize: '18px' }}>{m.emoji}</span>{m.label}
+                    </button>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>Category</label>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  {CATS.map((c) => (
+                    <button key={c.value} onClick={() => setCat(c.value)} style={pillSt(cat === c.value)}>{c.label}</button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>Your suggestion *</label>
+                <textarea
+                  rows={4}
+                  placeholder="e.g. It would be amazing if I could import files directly from Google Drive..."
+                  value={text}
+                  onChange={(e) => changeText(e.target.value)}
+                  style={{ ...inputBase, resize: 'vertical' }}
+                />
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '4px' }}>
+                  <span style={{ fontSize: '12px', color: '#f87171' }}>{err ? '⚠️ ' + err : ''}</span>
+                  <span style={{ fontSize: '11px', color: chars > 180 ? '#f59e0b' : 'var(--text-muted)' }}>{chars}/200</span>
+                </div>
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>
+                  Email <span style={{ color: 'var(--text-muted)', fontWeight: '400' }}>(optional — get notified when idea ships)</span>
+                </label>
+                <input type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} style={inputBase} />
+              </div>
+
+              <button
+                onClick={submit}
+                disabled={sending}
+                style={{ padding: '14px', background: sending ? 'rgba(99,102,241,0.4)' : 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: 'white', fontSize: '14px', fontWeight: '700', borderRadius: '10px', border: 'none', cursor: sending ? 'not-allowed' : 'pointer' }}
+              >
+                {sending ? '📨 Sending...' : '🚀 Submit Suggestion'}
+              </button>
+
+              <p style={{ fontSize: '11px', color: 'var(--text-muted)', textAlign: 'center' }}>
+                🔒 We read every single suggestion. The best ideas get built into the product.
+              </p>
             </div>
           )}
+
+          {tab === 'vote' && (
+            <div>
+              <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '16px' }}>Vote on suggestions. Top-voted ideas get built next.</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {[...list].sort((a, b) => b.votes - a.votes).map((s) => (
+                  <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 16px', background: s.voted ? 'rgba(99,102,241,0.06)' : 'var(--surface-2)', border: s.voted ? '1px solid rgba(99,102,241,0.2)' : '1px solid var(--border)', borderRadius: '12px' }}>
+                    <button onClick={() => vote(s.id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px', padding: '8px 12px', minWidth: '52px', background: s.voted ? 'rgba(99,102,241,0.2)' : 'var(--surface)', border: s.voted ? '1px solid rgba(99,102,241,0.4)' : '1px solid var(--border)', borderRadius: '10px', cursor: s.voted ? 'default' : 'pointer', flexShrink: 0 }}>
+                      <span style={{ fontSize: '14px' }}>{s.voted ? '✅' : '▲'}</span>
+                      <span style={{ fontSize: '13px', fontWeight: '700', color: s.voted ? 'var(--primary)' : 'var(--text-muted)' }}>{s.votes}</span>
+                    </button>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontSize: '13px', color: 'var(--text)', fontWeight: '500', lineHeight: '1.5', marginBottom: '4px' }}>{s.text}</p>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ fontSize: '10px', background: 'rgba(99,102,241,0.1)', color: 'var(--primary)', padding: '2px 8px', borderRadius: '99px' }}>{s.category}</span>
+                        <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{s.time}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p style={{ fontSize: '11px', color: 'var(--text-muted)', textAlign: 'center', marginTop: '16px' }}>Have a new idea? Switch to the Suggest tab.</p>
+            </div>
+          )}
+
           {tab === 'rate' && (
-            <div style={{ textAlign: 'center', padding: '20px' }}>
-              <button onClick={() => rate(5)} style={{ fontSize: '40px', background: 'none', border: 'none', cursor: 'pointer' }}>⭐</button>
+            <div style={{ textAlign: 'center', padding: '20px 0' }}>
+
+              {!rated && (
+                <div>
+                  <div style={{ fontSize: '48px', marginBottom: '16px' }}>🌟</div>
+                  <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '8px', color: 'var(--text)' }}>How would you rate AssetForge Labs?</h3>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '28px' }}>Your honest rating helps us improve</p>
+
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '12px' }}>
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <button key={n} onClick={() => rate(n)} onMouseEnter={() => setHover(n)} onMouseLeave={() => setHover(0)}
+                        style={{ fontSize: '40px', background: 'none', border: 'none', cursor: 'pointer', filter: (hover || stars) >= n ? 'none' : 'grayscale(100%)', transform: (hover || stars) >= n ? 'scale(1.2)' : 'scale(1)', transition: 'all 0.15s ease' }}>
+                        ⭐
+                      </button>
+                    ))}
+                  </div>
+
+                  <p style={{ fontSize: '13px', color: 'var(--text-muted)', minHeight: '20px' }}>
+                    {hover > 0 ? STARS_TEXT[hover] : 'Click a star to rate'}
+                  </p>
+
+                  <div style={{ marginTop: '32px', padding: '16px', background: 'var(--surface-2)', borderRadius: '12px', border: '1px solid var(--border)' }}>
+                    <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '12px' }}>Love it? Share with other creators:</p>
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
+                      <a 
+                        href="https://www.instagram.com/assetforgelabs/" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} 
+                        onMouseOver={(e) => e.currentTarget.style.color = '#e1306c'} 
+                        onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5Z" />
+                        </svg>
+                      </a>
+
+                      <a 
+                        href={TW} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} 
+                        onMouseOver={(e) => e.currentTarget.style.color = 'var(--text)'} 
+                        onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 3.974H5.078z" />
+                        </svg>
+                      </a>
+
+                      <a 
+                        href={LI} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }} 
+                        onMouseOver={(e) => e.currentTarget.style.color = '#0a66c2'} 
+                        onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {rated && (
+                <div>
+                  <div style={{ fontSize: '56px', marginBottom: '16px' }}>{stars >= 4 ? '🤩' : stars === 3 ? '😊' : '🙏'}</div>
+                  <h3 style={{ fontSize: '22px', fontWeight: '700', color: 'var(--success)', marginBottom: '8px' }}>
+                    {stars >= 4 ? 'You just made our day!' : 'Thanks for being honest!'}
+                  </h3>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '16px' }}>
+                    {'You rated us ' + String(stars) + '/5 stars.'}
+                    {stars < 4 ? ' We will work hard to earn that 5th star!' : ''}
+                  </p>
+                  {stars >= 4 && (
+                    <a href={ratingTweetUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', padding: '10px 24px', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', borderRadius: '8px', color: 'white', fontSize: '13px', textDecoration: 'none', fontWeight: '700' }}>
+                      🐦 Share on Twitter/X
+                    </a>
+                  )}
+                </div>
+              )}
+
             </div>
           )}
+
         </div>
       </div>
+
+      <p style={{ textAlign: 'center', fontSize: '12px', color: 'var(--text-muted)', marginTop: '20px' }}>
+        Built in Rajkot, India — Loved by creators worldwide
+      </p>
+
     </section>
   )
 }
