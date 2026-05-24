@@ -18,7 +18,7 @@ const DEFAULT_SUGGESTIONS: Suggestion[] = [
 ]
 
 const CATS = [
-  { value: '✨ Feature',      label: '✨ New Feature' },
+  { value: '✨ Feature',     label: '✨ New Feature' },
   { value: '🐛 Bug',         label: '🐛 Bug Report' },
   { value: '🎨 Design',      label: '🎨 Design' },
   { value: '🔗 Integration', label: '🔗 Integration' },
@@ -44,7 +44,6 @@ const STARS_TEXT: Record<number, string> = {
 const TW = 'https://twitter.com/intent/tweet?text=Just+found+AssetForge+Labs+%E2%80%94+best+digital+asset+packager+for+creators!+AI-powered+%26+100%25+browser-based+%F0%9F%94%A5&url=https://assetforgelabs.com'
 const LI = 'https://www.linkedin.com/sharing/share-offsite/?url=https://assetforgelabs.com'
 
-// ✅ FIXED: Using CSS variables instead of hardcoded white/dark colors
 const inputBase: React.CSSProperties = {
   width: '100%',
   padding: '10px 14px',
@@ -78,7 +77,7 @@ export default function FeedbackSection() {
       if (s) setList(JSON.parse(s))
       const r = localStorage.getItem('afl_r')
       if (r) { setStars(Number(r)); setRated(true) }
-    } catch { /* ignore */ }
+    } catch { }
   }, [])
 
   function changeText(v: string) {
@@ -94,22 +93,22 @@ export default function FeedbackSection() {
     }
     const next = [item, ...list]
     setList(next)
-    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch { /* ignore */ }
+    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch { }
     try {
-    await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        access_key: '0cd76dea-5efc-4afb-b4b2-5bccaca5d4ec',
-        subject: 'New Suggestion — AssetForge Labs',
-        from_name: 'AssetForge Labs Feedback',
-        suggestion: text,
-        category: cat,
-        user_email: email || 'Anonymous',
-        mood: mood || 'Not specified',
-      }),
-    })
-    } catch { /* ignore */ }
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '0cd76dea-5efc-4afb-b4b2-5bccaca5d4ec',
+          subject: 'New Suggestion — AssetForge Labs',
+          from_name: 'AssetForge Labs Feedback',
+          suggestion: text,
+          category: cat,
+          user_email: email || 'Anonymous',
+          mood: mood || 'Not specified',
+        }),
+      })
+    } catch { }
     setSending(false)
     setSent(true)
     setText('')
@@ -120,16 +119,15 @@ export default function FeedbackSection() {
   function vote(id: string) {
     const next = list.map((s) => s.id === id && !s.voted ? { ...s, votes: s.votes + 1, voted: true } : s)
     setList(next)
-    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch { /* ignore */ }
+    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch { }
   }
 
   function rate(n: number) {
     setStars(n)
     setRated(true)
-    try { localStorage.setItem('afl_r', String(n)) } catch { /* ignore */ }
+    try { localStorage.setItem('afl_r', String(n)) } catch { }
   }
 
-  // ✅ FIXED: High Contrast Colors for Accessibility
   function tabSt(on: boolean): React.CSSProperties {
     return {
       padding: '8px 18px', borderRadius: '8px', border: 'none',
@@ -138,9 +136,8 @@ export default function FeedbackSection() {
       color: on ? '#4338ca' : '#334155',
       fontSize: '13px', fontWeight: on ? 600 : 400, cursor: 'pointer',
     }
-  } //
+  }
 
-  // ✅ FIXED: High Contrast Colors for Accessibility
   function pillSt(on: boolean): React.CSSProperties {
     return {
       padding: '6px 14px', borderRadius: '99px', fontSize: '12px',
@@ -148,7 +145,7 @@ export default function FeedbackSection() {
       background: on ? 'rgba(99,102,241,0.1)' : 'var(--surface-2)',
       color: on ? '#4338ca' : '#334155', cursor: 'pointer',
     }
-  } //
+  }
 
   const ratingTweetUrl =
     'https://twitter.com/intent/tweet?text=Just+rated+AssetForge+Labs+' +
@@ -177,7 +174,6 @@ export default function FeedbackSection() {
         ))}
       </div>
 
-      {/* ✅ FIXED: Replaced hardcoded rgba white with var(--surface) and var(--border) */}
       <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '20px', overflow: 'hidden' }}>
 
         <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', padding: '0 20px', gap: '4px' }}>
@@ -188,7 +184,6 @@ export default function FeedbackSection() {
 
         <div style={{ padding: '24px' }}>
 
-          {/* SUGGEST */}
           {tab === 'suggest' && sent && (
             <div style={{ textAlign: 'center', padding: '32px 0' }}>
               <div style={{ fontSize: '56px', marginBottom: '16px' }}>🎉</div>
@@ -264,7 +259,6 @@ export default function FeedbackSection() {
             </div>
           )}
 
-          {/* VOTE */}
           {tab === 'vote' && (
             <div>
               <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '16px' }}>Vote on suggestions. Top-voted ideas get built next.</p>
@@ -289,7 +283,6 @@ export default function FeedbackSection() {
             </div>
           )}
 
-          {/* RATE */}
           {tab === 'rate' && (
             <div style={{ textAlign: 'center', padding: '20px 0' }}>
 
@@ -315,7 +308,6 @@ export default function FeedbackSection() {
                   <div style={{ marginTop: '32px', padding: '16px', background: 'var(--surface-2)', borderRadius: '12px', border: '1px solid var(--border)' }}>
                     <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '12px' }}>Love it? Share with other creators:</p>
                     <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
-                      {/* Official Instagram Logo */}
                       <a 
                         href="https://www.instagram.com/assetforgelabs/" 
                         target="_blank" 
@@ -329,7 +321,6 @@ export default function FeedbackSection() {
                         </svg>
                       </a>
 
-                      {/* Official X Logo */}
                       <a 
                         href={TW} 
                         target="_blank" 
@@ -343,7 +334,6 @@ export default function FeedbackSection() {
                         </svg>
                       </a>
 
-                      {/* Official LinkedIn Logo */}
                       <a 
                         href={LI} 
                         target="_blank" 
