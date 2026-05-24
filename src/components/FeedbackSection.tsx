@@ -77,7 +77,7 @@ export default function FeedbackSection() {
       if (s) setList(JSON.parse(s))
       const r = localStorage.getItem('afl_r')
       if (r) { setStars(Number(r)); setRated(true) }
-    } catch { }
+    } catch (error) { /* safe catch block */ }
   }, [])
 
   function changeText(v: string) {
@@ -93,7 +93,7 @@ export default function FeedbackSection() {
     }
     const next = [item, ...list]
     setList(next)
-    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch { }
+    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch (error) { }
     try {
       await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -108,7 +108,7 @@ export default function FeedbackSection() {
           mood: mood || 'Not specified',
         }),
       })
-    } catch { }
+    } catch (error) { }
     setSending(false)
     setSent(true)
     setText('')
@@ -119,13 +119,13 @@ export default function FeedbackSection() {
   function vote(id: string) {
     const next = list.map((s) => s.id === id && !s.voted ? { ...s, votes: s.votes + 1, voted: true } : s)
     setList(next)
-    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch { }
+    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch (error) { }
   }
 
   function rate(n: number) {
     setStars(n)
     setRated(true)
-    try { localStorage.setItem('afl_r', String(n)) } catch { }
+    try { localStorage.setItem('afl_r', String(n)) } catch (error) { }
   }
 
   function tabSt(on: boolean): React.CSSProperties {
@@ -134,7 +134,7 @@ export default function FeedbackSection() {
       borderBottom: on ? '2px solid #4338ca' : '2px solid transparent',
       background: on ? 'rgba(99,102,241,0.1)' : 'transparent',
       color: on ? '#4338ca' : '#334155',
-      fontSize: '13px', fontWeight: on ? 600 : 400, cursor: 'pointer',
+      fontSize: '13px', fontWeight: on ? '600' : '400', cursor: 'pointer',
     }
   }
 
@@ -159,7 +159,7 @@ export default function FeedbackSection() {
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: '#4338ca', marginBottom: '16px', fontWeight: '600' }}>
           🧠 Built with creators, for creators
         </div>
-        <h2 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '12px', color: 'var(--text)' }}>You Shape AssetForge Labs</h2>
+        <h2 style={{ fontSize: '32px', fontWeight: '800', marginBottom: '12px', color: 'var(--text)' }}>You Shape AssetForge Labs</h2>
         <p style={{ color: 'var(--text-muted)', fontSize: '16px', maxWidth: '500px', margin: '0 auto' }}>
           Every feature in this tool came from creator feedback. Tell us what you need — the best ideas get built next.
         </p>
@@ -168,7 +168,7 @@ export default function FeedbackSection() {
       <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', marginBottom: '32px', flexWrap: 'wrap' }}>
         {[['247', 'Suggestions received'], ['38', 'Features shipped'], ['94%', 'Users feel heard']].map(([v, l]) => (
           <div key={l} style={{ textAlign: 'center' }}>
-            <p style={{ fontSize: '24px', fontWeight: 800, color: 'var(--primary)', marginBottom: '2px' }}>{v}</p>
+            <p style={{ fontSize: '24px', fontWeight: '800', color: 'var(--primary)', marginBottom: '2px' }}>{v}</p>
             <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{l}</p>
           </div>
         ))}
@@ -187,7 +187,7 @@ export default function FeedbackSection() {
           {tab === 'suggest' && sent && (
             <div style={{ textAlign: 'center', padding: '32px 0' }}>
               <div style={{ fontSize: '56px', marginBottom: '16px' }}>🎉</div>
-              <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '8px', color: 'var(--success)' }}>Thank you! We got your suggestion.</h3>
+              <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '8px', color: 'var(--success)' }}>Thank you! We got your suggestion.</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '24px' }}>We read every submission and will notify you when your idea ships.</p>
               <button onClick={() => setSent(false)} style={{ padding: '10px 24px', background: 'none', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text-muted)', fontSize: '13px', cursor: 'pointer' }}>
                 Submit another
@@ -199,7 +199,7 @@ export default function FeedbackSection() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
               <div>
-                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '10px', fontWeight: 500 }}>How are you feeling about AssetForge Labs today?</label>
+                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '10px', fontWeight: '500' }}>How are you feeling about AssetForge Labs today?</label>
                 <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                   {MOODS.map((m) => (
                     <button key={m.emoji} onClick={() => setMood(m.emoji)} style={{
@@ -215,7 +215,7 @@ export default function FeedbackSection() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: 500 }}>Category</label>
+                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>Category</label>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                   {CATS.map((c) => (
                     <button key={c.value} onClick={() => setCat(c.value)} style={pillSt(cat === c.value)}>{c.label}</button>
@@ -224,7 +224,7 @@ export default function FeedbackSection() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: 500 }}>Your suggestion *</label>
+                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>Your suggestion *</label>
                 <textarea
                   rows={4}
                   placeholder="e.g. It would be amazing if I could import files directly from Google Drive..."
@@ -239,8 +239,8 @@ export default function FeedbackSection() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: 500 }}>
-                  Email <span style={{ color: 'var(--text-muted)', fontWeight: 400 }}>(optional — get notified when idea ships)</span>
+                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>
+                  Email <span style={{ color: 'var(--text-muted)', fontWeight: '400' }}>(optional — get notified when idea ships)</span>
                 </label>
                 <input type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} style={inputBase} />
               </div>
@@ -248,7 +248,7 @@ export default function FeedbackSection() {
               <button
                 onClick={submit}
                 disabled={sending}
-                style={{ padding: '14px', background: sending ? 'rgba(99,102,241,0.4)' : 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: 'white', fontSize: '14px', fontWeight: 700, borderRadius: '10px', border: 'none', cursor: sending ? 'not-allowed' : 'pointer' }}
+                style={{ padding: '14px', background: sending ? 'rgba(99,102,241,0.4)' : 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: 'white', fontSize: '14px', fontWeight: '700', borderRadius: '10px', border: 'none', cursor: sending ? 'not-allowed' : 'pointer' }}
               >
                 {sending ? '📨 Sending...' : '🚀 Submit Suggestion'}
               </button>
@@ -267,10 +267,10 @@ export default function FeedbackSection() {
                   <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 16px', background: s.voted ? 'rgba(99,102,241,0.06)' : 'var(--surface-2)', border: s.voted ? '1px solid rgba(99,102,241,0.2)' : '1px solid var(--border)', borderRadius: '12px' }}>
                     <button onClick={() => vote(s.id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px', padding: '8px 12px', minWidth: '52px', background: s.voted ? 'rgba(99,102,241,0.2)' : 'var(--surface)', border: s.voted ? '1px solid rgba(99,102,241,0.4)' : '1px solid var(--border)', borderRadius: '10px', cursor: s.voted ? 'default' : 'pointer', flexShrink: 0 }}>
                       <span style={{ fontSize: '14px' }}>{s.voted ? '✅' : '▲'}</span>
-                      <span style={{ fontSize: '13px', fontWeight: 700, color: s.voted ? 'var(--primary)' : 'var(--text-muted)' }}>{s.votes}</span>
+                      <span style={{ fontSize: '13px', fontWeight: '700', color: s.voted ? 'var(--primary)' : 'var(--text-muted)' }}>{s.votes}</span>
                     </button>
                     <div style={{ flex: 1 }}>
-                      <p style={{ fontSize: '13px', color: 'var(--text)', fontWeight: 500, lineHeight: '1.5', marginBottom: '4px' }}>{s.text}</p>
+                      <p style={{ fontSize: '13px', color: 'var(--text)', fontWeight: '500', lineHeight: '1.5', marginBottom: '4px' }}>{s.text}</p>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <span style={{ fontSize: '10px', background: 'rgba(99,102,241,0.1)', color: 'var(--primary)', padding: '2px 8px', borderRadius: '99px' }}>{s.category}</span>
                         <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{s.time}</span>
@@ -289,7 +289,7 @@ export default function FeedbackSection() {
               {!rated && (
                 <div>
                   <div style={{ fontSize: '48px', marginBottom: '16px' }}>🌟</div>
-                  <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '8px', color: 'var(--text)' }}>How would you rate AssetForge Labs?</h3>
+                  <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '8px', color: 'var(--text)' }}>How would you rate AssetForge Labs?</h3>
                   <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '28px' }}>Your honest rating helps us improve</p>
 
                   <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '12px' }}>
@@ -354,7 +354,7 @@ export default function FeedbackSection() {
               {rated && (
                 <div>
                   <div style={{ fontSize: '56px', marginBottom: '16px' }}>{stars >= 4 ? '🤩' : stars === 3 ? '😊' : '🙏'}</div>
-                  <h3 style={{ fontSize: '22px', fontWeight: 700, color: 'var(--success)', marginBottom: '8px' }}>
+                  <h3 style={{ fontSize: '22px', fontWeight: '700', color: 'var(--success)', marginBottom: '8px' }}>
                     {stars >= 4 ? 'You just made our day!' : 'Thanks for being honest!'}
                   </h3>
                   <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '16px' }}>
@@ -362,7 +362,7 @@ export default function FeedbackSection() {
                     {stars < 4 ? ' We will work hard to earn that 5th star!' : ''}
                   </p>
                   {stars >= 4 && (
-                    <a href={ratingTweetUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', padding: '10px 24px', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', borderRadius: '8px', color: 'white', fontSize: '13px', textDecoration: 'none', fontWeight: 700 }}>
+                    <a href={ratingTweetUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', padding: '10px 24px', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', borderRadius: '8px', color: 'white', fontSize: '13px', textDecoration: 'none', fontWeight: '700' }}>
                       🐦 Share on Twitter/X
                     </a>
                   )}
