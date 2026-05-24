@@ -77,9 +77,7 @@ export default function FeedbackSection() {
       if (s) setList(JSON.parse(s))
       const r = localStorage.getItem('afl_r')
       if (r) { setStars(Number(r)); setRated(true) }
-    } catch (err) {
-      console.error(err)
-    }
+    } catch { }
   }, [])
 
   function changeText(v: string) {
@@ -95,7 +93,7 @@ export default function FeedbackSection() {
     }
     const next = [item, ...list]
     setList(next)
-    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch (err) { console.error(err) }
+    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch { }
     try {
       await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -110,7 +108,7 @@ export default function FeedbackSection() {
           mood: mood || 'Not specified',
         }),
       })
-    } catch (err) { console.error(err) }
+    } catch { }
     setSending(false)
     setSent(true)
     setText('')
@@ -121,13 +119,13 @@ export default function FeedbackSection() {
   function vote(id: string) {
     const next = list.map((s) => s.id === id && !s.voted ? { ...s, votes: s.votes + 1, voted: true } : s)
     setList(next)
-    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch (err) { console.error(err) }
+    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch { }
   }
 
   function rate(n: number) {
     setStars(n)
     setRated(true)
-    try { localStorage.setItem('afl_r', String(n)) } catch (err) { console.error(err) }
+    try { localStorage.setItem('afl_r', String(n)) } catch { }
   }
 
   function tabSt(on: boolean): React.CSSProperties {
@@ -185,7 +183,6 @@ export default function FeedbackSection() {
         </div>
 
         <div style={{ padding: '24px' }}>
-
           {tab === 'suggest' && sent && (
             <div style={{ textAlign: 'center', padding: '32px 0' }}>
               <div style={{ fontSize: '56px', marginBottom: '16px' }}>🎉</div>
@@ -199,7 +196,6 @@ export default function FeedbackSection() {
 
           {tab === 'suggest' && !sent && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-
               <div>
                 <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '10px', fontWeight: '500' }}>How are you feeling about AssetForge Labs today?</label>
                 <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
@@ -215,7 +211,6 @@ export default function FeedbackSection() {
                   ))}
                 </div>
               </div>
-
               <div>
                 <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>Category</label>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -224,7 +219,6 @@ export default function FeedbackSection() {
                   ))}
                 </div>
               </div>
-
               <div>
                 <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>Your suggestion *</label>
                 <textarea
@@ -234,19 +228,7 @@ export default function FeedbackSection() {
                   onChange={(e) => changeText(e.target.value)}
                   style={{ ...inputBase, resize: 'vertical' }}
                 />
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '4px' }}>
-                  <span style={{ fontSize: '12px', color: '#f87171' }}>{err ? '⚠️ ' + err : ''}</span>
-                  <span style={{ fontSize: '11px', color: chars > 180 ? '#f59e0b' : 'var(--text-muted)' }}>{chars}/200</span>
-                </div>
               </div>
-
-              <div>
-                <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>
-                  Email <span style={{ color: 'var(--text-muted)', fontWeight: '400' }}>(optional — get notified when idea ships)</span>
-                </label>
-                <input type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} style={inputBase} />
-              </div>
-
               <button
                 onClick={submit}
                 disabled={sending}
@@ -254,10 +236,6 @@ export default function FeedbackSection() {
               >
                 {sending ? '📨 Sending...' : '🚀 Submit Suggestion'}
               </button>
-
-              <p style={{ fontSize: '11px', color: 'var(--text-muted)', textAlign: 'center' }}>
-                🔒 We read every single suggestion. The best ideas get built into the product.
-              </p>
             </div>
           )}
 
@@ -273,28 +251,20 @@ export default function FeedbackSection() {
                     </button>
                     <div style={{ flex: 1 }}>
                       <p style={{ fontSize: '13px', color: 'var(--text)', fontWeight: '500', lineHeight: '1.5', marginBottom: '4px' }}>{s.text}</p>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <span style={{ fontSize: '10px', background: 'rgba(99,102,241,0.1)', color: 'var(--primary)', padding: '2px 8px', borderRadius: '99px' }}>{s.category}</span>
-                        <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{s.time}</span>
-                      </div>
                     </div>
                   </div>
                 ))}
               </div>
-              <p style={{ fontSize: '11px', color: 'var(--text-muted)', textAlign: 'center', marginTop: '16px' }}>Have a new idea? Switch to the Suggest tab.</p>
             </div>
           )}
 
           {tab === 'rate' && (
-            <div style={{ textAlign: 'center', padding: '20px 0' }}>
-
+            <div style={{ textAlign: 'center', padding: '20px' }}>
               {!rated && (
                 <div>
                   <div style={{ fontSize: '48px', marginBottom: '16px' }}>🌟</div>
                   <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '8px', color: 'var(--text)' }}>How would you rate AssetForge Labs?</h3>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '28px' }}>Your honest rating helps us improve</p>
-
-                  <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '12px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: '12px' }}>
                     {[1, 2, 3, 4, 5].map((n) => (
                       <button key={n} onClick={() => rate(n)} onMouseEnter={() => setHover(n)} onMouseLeave={() => setHover(0)}
                         style={{ fontSize: '40px', background: 'none', border: 'none', cursor: 'pointer', filter: (hover || stars) >= n ? 'none' : 'grayscale(100%)', transform: (hover || stars) >= n ? 'scale(1.2)' : 'scale(1)', transition: 'all 0.15s ease' }}>
@@ -302,23 +272,12 @@ export default function FeedbackSection() {
                       </button>
                     ))}
                   </div>
-
-                  <p style={{ fontSize: '13px', color: 'var(--text-muted)', minHeight: '20px' }}>
-                    {hover > 0 ? STARS_TEXT[hover] : 'Click a star to rate'}
-                  </p>
                 </div>
               )}
-
               {rated && (
                 <div>
-                  <div style={{ fontSize: '56px', marginBottom: '16px' }}>{stars >= 4 ? '🤩' : stars === 3 ? '😊' : '🙏'}</div>
-                  <h3 style={{ fontSize: '22px', fontWeight: '700', color: 'var(--success)', marginBottom: '8px' }}>
-                    {stars >= 4 ? 'You just made our day!' : 'Thanks for being honest!'}
-                  </h3>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '16px' }}>
-                    {'You rated us ' + String(stars) + '/5 stars.'}
-                    {stars < 4 ? ' We will work hard to earn that 5th star!' : ''}
-                  </p>
+                  <div style={{ fontSize: '56px', marginBottom: '16px' }}>{stars >= 4 ? '🤩' : '🙏'}</div>
+                  <h3 style={{ fontSize: '22px', fontWeight: '700', color: 'var(--success)' }}>Thanks for your rating!</h3>
                 </div>
               )}
             </div>
