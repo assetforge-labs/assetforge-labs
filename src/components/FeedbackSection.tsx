@@ -77,7 +77,9 @@ export default function FeedbackSection() {
       if (s) setList(JSON.parse(s))
       const r = localStorage.getItem('afl_r')
       if (r) { setStars(Number(r)); setRated(true) }
-    } catch (error) { /* safe catch block */ }
+    } catch (error) {
+      console.error(error)
+    }
   }, [])
 
   function changeText(v: string) {
@@ -93,7 +95,12 @@ export default function FeedbackSection() {
     }
     const next = [item, ...list]
     setList(next)
-    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch (error) { }
+    try { 
+      localStorage.setItem('afl_s', JSON.stringify(next)) 
+    } catch (error) {
+      console.error(error)
+    }
+    
     try {
       await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -108,7 +115,9 @@ export default function FeedbackSection() {
           mood: mood || 'Not specified',
         }),
       })
-    } catch (error) { }
+    } catch (error) {
+      console.error(error)
+    }
     setSending(false)
     setSent(true)
     setText('')
@@ -119,13 +128,21 @@ export default function FeedbackSection() {
   function vote(id: string) {
     const next = list.map((s) => s.id === id && !s.voted ? { ...s, votes: s.votes + 1, voted: true } : s)
     setList(next)
-    try { localStorage.setItem('afl_s', JSON.stringify(next)) } catch (error) { }
+    try { 
+      localStorage.setItem('afl_s', JSON.stringify(next)) 
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   function rate(n: number) {
     setStars(n)
     setRated(true)
-    try { localStorage.setItem('afl_r', String(n)) } catch (error) { }
+    try { 
+      localStorage.setItem('afl_r', String(n)) 
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   function tabSt(on: boolean): React.CSSProperties {
