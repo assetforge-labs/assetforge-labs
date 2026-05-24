@@ -114,7 +114,7 @@ export default function MetadataForm({ productName, onMetadataGenerated, isPro }
               >
                 <div style={{ fontSize: '20px', marginBottom: '4px' }}>{cat.icon}</div>
                 <div style={{ fontWeight: '600', marginBottom: '2px' }}>{cat.label}</div>
-                <div style={{ fontSize: '9px', fontWeight: category === cat.value ? '500' : '400', color: category === cat.value ? '#4338ca' : '#475569' }}>
+                <div style={{ fontSize: '9px', fontWeight: '500', color: category === cat.value ? '#4338ca' : '#475569' }}>
                   {cat.platform}
                 </div>
               </button>
@@ -123,7 +123,7 @@ export default function MetadataForm({ productName, onMetadataGenerated, isPro }
         </div>
 
         <div>
-          <label style={labelStyle}>What's included</label>
+          <label style={labelStyle}>What&apos;s included</label>
           <textarea
             rows={3}
             placeholder={'- 50 unique brush stamps\n- 10 texture overlays\n- Commercial license'}
