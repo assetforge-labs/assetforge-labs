@@ -66,7 +66,7 @@ export default function DragDropZone({ ingestion }: Props) {
         />
         <div style={{ fontSize: '48px', marginBottom: '16px' }}>{isDragActive ? '📂' : '📁'}</div>
         <p style={{ color: 'var(--text)', fontSize: '18px', fontWeight: '700' }}>
-          {isDragActive ? 'Release to add files!' : 'Drag &amp; drop your files here'}
+          {isDragActive ? 'Release to add files!' : 'Drag & drop your files here'}
         </p>
         <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>or click to browse</p>
         
