@@ -61,14 +61,12 @@ function App() {
         
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'nowrap' }}>
           <a href="#features" style={{ fontSize: '13px', color: 'var(--text-muted)', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.4s ease' }}>Features</a>
-          {/* ACCESSIBILITY FIX: Changed #10b981 to #059669 for contrast */}
-          <span style={{ fontSize: '12px', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)', color: '#059669', padding: '4px 10px', borderRadius: '99px', whiteSpace: 'nowrap', fontWeight: '600' }}>✨ 100% Free Forever</span>
+          <span style={{ fontSize: '12px', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.4)', color: 'var(--text)', padding: '4px 10px', borderRadius: '99px', whiteSpace: 'nowrap', fontWeight: '700' }}>✨ 100% Free Forever</span>
           <ThemeToggle />
         </div>
       </nav>
 
       <section className="fade-in" style={{ textAlign: 'center', padding: '72px 24px 48px' }}>
-        {/* ACCESSIBILITY FIX: Changed #6366f1 to #4f46e5 for contrast */}
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: '#4f46e5', marginBottom: '24px', textAlign: 'left' }}>
           <span className="pulse-dot" style={{ width: '8px', height: '8px', minWidth: '8px', minHeight: '8px', borderRadius: '50%', background: '#4f46e5', display: 'inline-block', flexShrink: 0 }} />
           <span>World&apos;s First Digital asset packaging tool for creators selling on Etsy, Gumroad, Creative Market &amp; more+</span>
@@ -82,14 +80,13 @@ function App() {
         </p>
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap', marginBottom: '32px' }}>
-          {/* ACCESSIBILITY FIX: Darkened hex colors for visibility */}
           {[
-            { label: '🧠 Smart Analyzer', color: '#059669', bg: 'rgba(16,185,129,0.1)' },
-            { label: '👁️ Live Preview', color: '#7c3aed', bg: 'rgba(139,92,246,0.1)' },
-            { label: '📊 SEO Score', color: '#db2777', bg: 'rgba(236,72,153,0.1)' },
-            { label: '🔒 100% Private', color: '#059669', bg: 'rgba(16,185,129,0.1)' },
+            { label: '🧠 Smart Analyzer', borderColor: '#10b981', bg: 'rgba(16,185,129,0.15)' },
+            { label: '👁️ Live Preview', borderColor: '#8b5cf6', bg: 'rgba(139,92,246,0.15)' },
+            { label: '📊 SEO Score', borderColor: '#ec4899', bg: 'rgba(236,72,153,0.15)' },
+            { label: '🔒 100% Private', borderColor: '#10b981', bg: 'rgba(16,185,129,0.15)' },
           ].map((badge) => (
-            <span key={badge.label} style={{ fontSize: '12px', padding: '5px 14px', borderRadius: '99px', border: `1px solid ${badge.color}40`, color: badge.color, background: badge.bg, fontWeight: '600' }}>
+            <span key={badge.label} style={{ fontSize: '12px', padding: '5px 14px', borderRadius: '99px', border: `1px solid ${badge.borderColor}80`, color: 'var(--text)', background: badge.bg, fontWeight: '700' }}>
               {badge.label}
             </span>
           ))}
