@@ -1,1 +1,6 @@
-/* /index.html   200
+/etsy-digital-product-packager   /etsy-digital-product-packager.html   200
+/notion-template-bundler         /notion-template-bundler.html         200
+/gumroad-asset-optimizer         /gumroad-asset-optimizer.html         200
+
+# Main App Catch-all (Keep this at the very bottom)
+/*                               /index.html                           200
