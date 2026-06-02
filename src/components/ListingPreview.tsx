@@ -16,7 +16,7 @@ export default function ListingPreview({ productName, description, fileCount, pl
   if (platform === 'etsy') {
     return (
       <div style={{ marginTop: '8px' }}>
-        {/* Etsy Chrome */}
+        {/* Etsy Chrome (Kept Brand Colors) */}
         <div style={{ background: '#F1641E', borderRadius: '12px 12px 0 0', padding: '8px 16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.4)' }} />
           <div style={{ flex: 1, background: 'rgba(255,255,255,0.2)', borderRadius: '4px', padding: '3px 10px', fontSize: '11px', color: 'white' }}>
@@ -24,8 +24,8 @@ export default function ListingPreview({ productName, description, fileCount, pl
           </div>
         </div>
 
-        {/* Etsy Listing Preview */}
-        <div style={{ background: 'white', borderRadius: '0 0 12px 12px', padding: '16px', color: '#222' }}>
+        {/* Etsy Listing Preview (Dynamic Theme Applied) */}
+        <div style={{ background: 'var(--surface)', borderRadius: '0 0 12px 12px', padding: '16px', border: '1px solid var(--border)', borderTop: 'none', transition: 'background-color 0.4s ease, border-color 0.4s ease' }}>
           <div style={{ display: 'flex', gap: '16px' }}>
 
             {/* Mock image */}
@@ -35,8 +35,8 @@ export default function ListingPreview({ productName, description, fileCount, pl
 
             {/* Listing details */}
             <div style={{ flex: 1 }}>
-              <p style={{ fontSize: '10px', color: '#595959', marginBottom: '4px' }}>Digital Download</p>
-              <h3 style={{ fontSize: '15px', fontWeight: '400', color: '#222', lineHeight: '1.4', marginBottom: '8px' }}>
+              <p style={{ fontSize: '10px', color: 'var(--text-muted)', marginBottom: '4px', transition: 'color 0.4s ease' }}>Digital Download</p>
+              <h3 style={{ fontSize: '15px', fontWeight: '400', color: 'var(--text)', lineHeight: '1.4', marginBottom: '8px', transition: 'color 0.4s ease' }}>
                 {title}
               </h3>
 
@@ -45,22 +45,22 @@ export default function ListingPreview({ productName, description, fileCount, pl
                 {'★★★★★'.split('').map((s, i) => (
                   <span key={i} style={{ color: '#F1641E', fontSize: '13px' }}>{s}</span>
                 ))}
-                <span style={{ fontSize: '12px', color: '#595959' }}>{rating} ({reviews})</span>
+                <span style={{ fontSize: '12px', color: 'var(--text-muted)', transition: 'color 0.4s ease' }}>{rating} ({reviews})</span>
               </div>
 
               {/* Price */}
-              <p style={{ fontSize: '22px', fontWeight: '700', color: '#222', marginBottom: '8px' }}>{price}</p>
+              <p style={{ fontSize: '22px', fontWeight: '700', color: 'var(--text)', marginBottom: '8px', transition: 'color 0.4s ease' }}>{price}</p>
 
               {/* Instant download badge */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '12px' }}>
-                <span style={{ fontSize: '11px', background: '#F8F8F8', border: '1px solid #D8D8D8', borderRadius: '4px', padding: '2px 8px', color: '#595959' }}>
+                <span style={{ fontSize: '11px', background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: '4px', padding: '2px 8px', color: 'var(--text-muted)', transition: 'all 0.4s ease' }}>
                   ⚡ Instant Digital Download
                 </span>
-                <span style={{ fontSize: '11px', color: '#595959' }}>{fileCount} files</span>
+                <span style={{ fontSize: '11px', color: 'var(--text-muted)', transition: 'color 0.4s ease' }}>{fileCount} files</span>
               </div>
 
               {/* Add to cart */}
-              <button style={{ background: '#F1641E', color: 'white', border: 'none', borderRadius: '99px', padding: '10px 24px', fontSize: '13px', fontWeight: '700', cursor: 'pointer', width: '100%' }}>
+              <button style={{ background: '#F1641E', color: 'white', border: 'none', borderRadius: '99px', padding: '10px 24px', fontSize: '13px', fontWeight: '700', cursor: 'not-allowed', width: '100%', opacity: 0.9 }}>
                 Add to cart
               </button>
             </div>
@@ -68,9 +68,9 @@ export default function ListingPreview({ productName, description, fileCount, pl
 
           {/* Description preview */}
           {description && (
-            <div style={{ marginTop: '12px', borderTop: '1px solid #E5E5E5', paddingTop: '12px' }}>
-              <p style={{ fontSize: '13px', fontWeight: '700', marginBottom: '6px', color: '#222' }}>Description</p>
-              <p style={{ fontSize: '12px', color: '#595959', lineHeight: '1.6', WebkitLineClamp: 4, overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical' as any }}>
+            <div style={{ marginTop: '12px', borderTop: '1px solid var(--border)', paddingTop: '12px', transition: 'border-color 0.4s ease' }}>
+              <p style={{ fontSize: '13px', fontWeight: '700', marginBottom: '6px', color: 'var(--text)', transition: 'color 0.4s ease' }}>Description</p>
+              <p style={{ fontSize: '12px', color: 'var(--text-muted)', lineHeight: '1.6', WebkitLineClamp: 4, overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical' as any, transition: 'color 0.4s ease' }}>
                 {description.slice(0, 200)}...
               </p>
             </div>
@@ -89,20 +89,20 @@ export default function ListingPreview({ productName, description, fileCount, pl
           gumroad.com/l/your-product
         </div>
       </div>
-      <div style={{ background: 'white', borderRadius: '0 0 12px 12px', padding: '20px', color: '#000' }}>
+      <div style={{ background: 'var(--surface)', borderRadius: '0 0 12px 12px', padding: '20px', border: '1px solid var(--border)', borderTop: 'none', transition: 'background-color 0.4s ease, border-color 0.4s ease' }}>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
           <div style={{ width: '140px', height: '140px', background: 'linear-gradient(135deg, #FF90E8, #b060ff)', borderRadius: '8px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px' }}>
             🎨
           </div>
           <div style={{ flex: 1 }}>
-            <h3 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '8px', lineHeight: '1.3' }}>{title}</h3>
-            <p style={{ fontSize: '22px', fontWeight: '800', marginBottom: '12px' }}>{price}</p>
+            <h3 style={{ fontSize: '18px', fontWeight: '800', color: 'var(--text)', marginBottom: '8px', lineHeight: '1.3', transition: 'color 0.4s ease' }}>{title}</h3>
+            <p style={{ fontSize: '22px', fontWeight: '800', color: 'var(--text)', marginBottom: '12px', transition: 'color 0.4s ease' }}>{price}</p>
             {description && (
-              <p style={{ fontSize: '12px', color: '#444', lineHeight: '1.6', marginBottom: '12px' }}>
+              <p style={{ fontSize: '12px', color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '12px', transition: 'color 0.4s ease' }}>
                 {description.slice(0, 150)}...
               </p>
             )}
-            <button style={{ background: '#000', color: 'white', border: 'none', borderRadius: '6px', padding: '10px 24px', fontSize: '14px', fontWeight: '700', cursor: 'pointer' }}>
+            <button style={{ background: 'var(--text)', color: 'var(--bg)', border: 'none', borderRadius: '6px', padding: '10px 24px', fontSize: '14px', fontWeight: '700', cursor: 'not-allowed', transition: 'background-color 0.4s ease, color 0.4s ease' }}>
               I want this!
             </button>
           </div>
