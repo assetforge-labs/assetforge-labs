@@ -1,6 +1,13 @@
+# 1. 301 Permanent Redirects (Catching typos and old links)
+/notion-templates                /notion-template-bundler              301
+/privacy                         /privacy.html                         301
+/terms                           /terms.html                           301
+/refund                          /refund.html                          301
+
+# 2. 200 Rewrites (Mapping clean URLs to static HTML files)
 /etsy-digital-product-packager   /etsy-digital-product-packager.html   200
 /notion-template-bundler         /notion-template-bundler.html         200
 /gumroad-asset-optimizer         /gumroad-asset-optimizer.html         200
 
-# Main App Catch-all (Keep this at the very bottom)
-/*                               /index.html                           200
+# 3. Main App Catch-all (Must stay at the very bottom)
+/* /index.html                           200
