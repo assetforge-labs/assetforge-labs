@@ -11,7 +11,7 @@
 
   <style>
     body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; }
-    .container { max-width: 700px; padding: 40px 24px; }
+    .container { max-width: 700px; padding: 40px 24px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
     h1 { font-size: 2.5rem; color: #818cf8; margin-bottom: 16px; line-height: 1.2; }
     p { font-size: 1.1rem; color: #94a3b8; line-height: 1.6; margin-bottom: 32px; }
     .cta-button { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: white; padding: 16px 36px; font-size: 1.2rem; font-weight: 600; border: none; border-radius: 12px; cursor: pointer; text-decoration: none; box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4); transition: transform 0.2s, box-shadow 0.2s; display: inline-block; }
@@ -22,6 +22,7 @@
     .feature-card p { margin: 0; font-size: 0.95rem; color: #64748b; }
     .back-link { margin-top: 40px; display: block; color: #64748b; text-decoration: none; font-size: 0.9rem; }
     .back-link:hover { color: #818cf8; }
+    footer { padding: 40px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.08); width: 100%; margin-top: auto; }
   </style>
 </head>
 <body>
@@ -30,7 +31,6 @@
     <h1>The Ultimate Free Digital Product Packager for Etsy Sellers</h1>
     <p>Wasting hours organizing folders, creating listing previews, and writing SEO tags manually? AssetForge Labs automates your entire digital asset workflow in 60 seconds. Run 100% locally in your browser—secure, fast, and completely free.</p>
     
-    <!-- Launches your main React App layout -->
     <a href="/?ref=etsy-landing" class="cta-button">Launch Free Packager Tool ⚡</a>
 
     <div class="features">
@@ -46,6 +46,15 @@
 
     <a href="/" class="back-link">← Go to Main Application</a>
   </div>
+
+  <footer>
+    <div style="display: flex; justify-content: center; gap: 24px; font-size: 13px; color: #94a3b8; flex-wrap: wrap; margin-bottom: 8px;">
+      <a href="/privacy" style="color: #94a3b8; text-decoration: none;">Privacy Policy</a>
+      <a href="/terms" style="color: #94a3b8; text-decoration: none;">Terms of Service</a>
+      <a href="mailto:assetforgelabs@gmail.com" style="color: #94a3b8; text-decoration: none;">Contact Us</a>
+    </div>
+    <p style="font-size: 12px; color: #64748b; margin: 0;">© 2026 AssetForge Labs. All rights reserved.</p>
+  </footer>
 
 </body>
 </html>
