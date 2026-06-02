@@ -21,19 +21,20 @@ export default function FileQueue({ ingestion, formatSize }: Props) {
 
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-        <span style={{ fontSize: '14px', fontWeight: '600', color: '#f8fafc' }}>
+        <span style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text)', transition: 'color 0.4s ease' }}>
           ✅ Files Ready to Package
         </span>
         <button
           onClick={ingestion.clearAll}
           style={{
             fontSize: '12px',
-            color: '#94a3b8',
+            color: 'var(--text-muted)',
             background: 'none',
-            border: '1px solid rgba(255,255,255,0.1)',
+            border: '1px solid var(--border)',
             borderRadius: '6px',
             padding: '4px 10px',
             cursor: 'pointer',
+            transition: 'color 0.4s ease, border-color 0.4s ease'
           }}
         >
           Clear All
@@ -50,19 +51,20 @@ export default function FileQueue({ ingestion, formatSize }: Props) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.07)',
+              background: 'var(--surface-2)',
+              border: '1px solid var(--border)',
               borderRadius: '10px',
               padding: '10px 14px',
+              transition: 'background-color 0.4s ease, border-color 0.4s ease'
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span style={{ fontSize: '20px' }}>{getFileIcon(f.type)}</span>
               <div>
-                <p style={{ fontSize: '13px', fontWeight: '500', color: '#f8fafc', maxWidth: '260px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <p style={{ fontSize: '13px', fontWeight: '500', color: 'var(--text)', maxWidth: '260px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', transition: 'color 0.4s ease' }}>
                   {f.name}
                 </p>
-                <p style={{ fontSize: '11px', color: '#94a3b8' }}>{formatSize(f.size)}</p>
+                <p style={{ fontSize: '11px', color: 'var(--text-muted)', transition: 'color 0.4s ease' }}>{formatSize(f.size)}</p>
               </div>
             </div>
             <button
@@ -70,11 +72,12 @@ export default function FileQueue({ ingestion, formatSize }: Props) {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#94a3b8',
+                color: 'var(--text-muted)',
                 cursor: 'pointer',
                 fontSize: '18px',
                 lineHeight: 1,
                 padding: '4px',
+                transition: 'color 0.4s ease'
               }}
               title="Remove file"
             >
