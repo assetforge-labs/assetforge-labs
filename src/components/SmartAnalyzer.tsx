@@ -147,10 +147,10 @@ export default function SmartAnalyzer({ files, productName }: Props) {
         </div>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#f8fafc' }}>Smart Market Analyzer</h2>
+            <h2 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text)', transition: 'color 0.4s ease' }}>Smart Market Analyzer</h2>
             <span style={{ fontSize: '10px', background: 'linear-gradient(135deg,#10b981,#059669)', color: 'white', padding: '2px 8px', borderRadius: '99px', fontWeight: 700 }}>WORLD FIRST</span>
           </div>
-          <p style={{ fontSize: '12px', color: '#94a3b8' }}>Instant market intelligence — best platform, price, keywords & revenue estimate</p>
+          <p style={{ fontSize: '12px', color: 'var(--text-muted)', transition: 'color 0.4s ease' }}>Instant market intelligence — best platform, price, keywords & revenue estimate</p>
         </div>
       </div>
 
@@ -161,12 +161,12 @@ export default function SmartAnalyzer({ files, productName }: Props) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <span style={{ fontSize: '28px' }}>{data.emoji}</span>
             <div>
-              <p style={{ fontSize: '11px', color: '#64748b', marginBottom: '2px' }}>Detected Category</p>
-              <p style={{ fontSize: '15px', fontWeight: 700, color: '#f8fafc' }}>{data.category}</p>
+              <p style={{ fontSize: '11px', color: 'var(--text-muted)', marginBottom: '2px', transition: 'color 0.4s ease' }}>Detected Category</p>
+              <p style={{ fontSize: '15px', fontWeight: 700, color: 'var(--text)', transition: 'color 0.4s ease' }}>{data.category}</p>
             </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', padding: '6px 12px' }}>
-            <span style={{ fontSize: '11px', color: '#94a3b8' }}>Market Demand</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '8px', padding: '6px 12px', transition: 'background-color 0.4s ease, border-color 0.4s ease' }}>
+            <span style={{ fontSize: '11px', color: 'var(--text-muted)', transition: 'color 0.4s ease' }}>Market Demand</span>
             <span style={{ fontSize: '16px', fontWeight: 800, color: data.demandScore >= 85 ? '#10b981' : data.demandScore >= 70 ? '#f59e0b' : '#ef4444' }}>
               {data.demandScore}/100
             </span>
@@ -181,8 +181,8 @@ export default function SmartAnalyzer({ files, productName }: Props) {
             { label: '📈 Est. Monthly Revenue', value: data.monthlyRevenue, color: '#f59e0b' },
             { label: '⚔️ Competition', value: data.competition, color: data.competitionColor },
           ].map((m) => (
-            <div key={m.label} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '10px', padding: '12px' }}>
-              <p style={{ fontSize: '11px', color: '#64748b', marginBottom: '4px' }}>{m.label}</p>
+            <div key={m.label} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '10px', padding: '12px', transition: 'background-color 0.4s ease, border-color 0.4s ease' }}>
+              <p style={{ fontSize: '11px', color: 'var(--text-muted)', marginBottom: '4px', transition: 'color 0.4s ease' }}>{m.label}</p>
               <p style={{ fontSize: '14px', fontWeight: 700, color: m.color }}>{m.value}</p>
             </div>
           ))}
@@ -190,12 +190,12 @@ export default function SmartAnalyzer({ files, productName }: Props) {
 
         {/* Platform Scores */}
         <div style={{ marginBottom: '20px' }}>
-          <p style={{ fontSize: '12px', color: '#94a3b8', marginBottom: '10px', fontWeight: 500 }}>Best platforms for your asset type:</p>
+          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '10px', fontWeight: 500, transition: 'color 0.4s ease' }}>Best platforms for your asset type:</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {data.platformScores.map((p) => (
               <div key={p.name} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <span style={{ fontSize: '12px', color: '#94a3b8', width: '120px', flexShrink: 0 }}>{p.name}</span>
-                <div style={{ flex: 1, background: 'rgba(255,255,255,0.06)', borderRadius: '99px', height: '6px' }}>
+                <span style={{ fontSize: '12px', color: 'var(--text-muted)', width: '120px', flexShrink: 0, transition: 'color 0.4s ease' }}>{p.name}</span>
+                <div style={{ flex: 1, background: 'var(--surface-2)', borderRadius: '99px', height: '6px', transition: 'background-color 0.4s ease' }}>
                   <div style={{ width: `${p.score}%`, height: '6px', borderRadius: '99px', background: p.color, transition: 'width 0.8s ease' }} />
                 </div>
                 <span style={{ fontSize: '12px', fontWeight: 700, color: p.color, width: '36px', textAlign: 'right' }}>{p.score}%</span>
@@ -206,30 +206,30 @@ export default function SmartAnalyzer({ files, productName }: Props) {
 
         {/* Top Keywords */}
         <div style={{ marginBottom: '20px' }}>
-          <p style={{ fontSize: '12px', color: '#94a3b8', marginBottom: '10px', fontWeight: 500 }}>🔍 Top 2026 keywords for your category:</p>
+          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '10px', fontWeight: 500, transition: 'color 0.4s ease' }}>🔍 Top 2026 keywords for your category:</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
             {data.topKeywords.map((kw) => (
               <span
                 key={kw}
                 onClick={() => navigator.clipboard.writeText(kw)}
                 title="Click to copy"
-                style={{ fontSize: '12px', padding: '4px 10px', borderRadius: '99px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', color: '#a5b4fc', cursor: 'pointer' }}
+                style={{ fontSize: '12px', padding: '4px 10px', borderRadius: '99px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', color: '#6366f1', cursor: 'pointer' }}
               >
                 {kw}
               </span>
             ))}
           </div>
-          <p style={{ fontSize: '10px', color: '#475569', marginTop: '6px' }}>💡 Click any keyword to copy it</p>
+          <p style={{ fontSize: '10px', color: 'var(--text-muted)', marginTop: '6px', transition: 'color 0.4s ease' }}>💡 Click any keyword to copy it</p>
         </div>
 
         {/* Pro Tips */}
         <div>
-          <p style={{ fontSize: '12px', color: '#94a3b8', marginBottom: '10px', fontWeight: 500 }}>⚡ Expert tips to sell more:</p>
+          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '10px', fontWeight: 500, transition: 'color 0.4s ease' }}>⚡ Expert tips to sell more:</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {data.tips.map((tip, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', padding: '10px 12px', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <span style={{ fontSize: '14px', flexShrink: 0 }}>{'💎'}</span>
-                <p style={{ fontSize: '12px', color: '#cbd5e1', lineHeight: '1.5' }}>{tip}</p>
+              <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', padding: '10px 12px', background: 'var(--surface)', borderRadius: '8px', border: '1px solid var(--border)', transition: 'background-color 0.4s ease, border-color 0.4s ease' }}>
+                <span style={{ fontSize: '14px', flexShrink: 0 }}>💎</span>
+                <p style={{ fontSize: '12px', color: 'var(--text)', lineHeight: '1.5', margin: 0, transition: 'color 0.4s ease' }}>{tip}</p>
               </div>
             ))}
           </div>
