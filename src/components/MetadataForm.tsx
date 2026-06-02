@@ -104,16 +104,16 @@ export default function MetadataForm({ productName, onMetadataGenerated, isPro }
                   borderRadius: '10px',
                   border: category === cat.value ? '1px solid #4f46e5' : '1px solid var(--border)',
                   background: category === cat.value ? 'rgba(99,102,241,0.15)' : 'var(--surface-2)',
-                  color: category === cat.value ? '#4338ca' : '#334155',
+                  color: category === cat.value ? '#4338ca' : 'var(--text)',
                   fontSize: '11px',
                   cursor: 'pointer',
                   textAlign: 'center',
-                  transition: 'all 0.15s ease',
+                  transition: 'all 0.4s ease',
                 }}
               >
                 <div style={{ fontSize: '20px', marginBottom: '4px' }}>{cat.icon}</div>
                 <div style={{ fontWeight: '600', marginBottom: '2px' }}>{cat.label}</div>
-                <div style={{ fontSize: '9px', fontWeight: '500', color: category === cat.value ? '#4338ca' : '#475569' }}>
+                <div style={{ fontSize: '9px', fontWeight: '500', color: category === cat.value ? '#4338ca' : 'var(--text-muted)', transition: 'color 0.4s ease' }}>
                   {cat.platform}
                 </div>
               </button>
