@@ -35,26 +35,26 @@ export default function ListingScore({ productName, description, fileCount, hasM
   const offset = circumference - (score / 100) * circumference
 
   return (
-    <div style={{ marginTop: '24px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px', padding: '20px' }}>
+    <div style={{ marginTop: '24px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px', padding: '20px', transition: 'background-color 0.4s ease, border-color 0.4s ease' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
         <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(245,158,11,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px' }}>📊</div>
         <div>
-          <h2 style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text)' }}>Listing Health Score</h2>
-          <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Real-time SEO readiness</p>
+          <h2 style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text)', transition: 'color 0.4s ease' }}>Listing Health Score</h2>
+          <p style={{ fontSize: '12px', color: 'var(--text-muted)', transition: 'color 0.4s ease' }}>Real-time SEO readiness</p>
         </div>
       </div>
 
       <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
           <svg width="100" height="100" style={{ transform: 'rotate(-90deg)' }}>
-            <circle cx="50" cy="50" r="40" fill="none" stroke="var(--border)" strokeWidth="8" />
-            <circle cx="50" cy="50" r="40" fill="none" stroke={scoreColor} strokeWidth="8" strokeDasharray={circumference} strokeDashoffset={offset} strokeLinecap="round" style={{ transition: 'stroke-dashoffset 0.8s ease' }} />
+            <circle cx="50" cy="50" r="40" fill="none" stroke="var(--border)" strokeWidth="8" style={{ transition: 'stroke 0.4s ease' }} />
+            <circle cx="50" cy="50" r="40" fill="none" stroke={scoreColor} strokeWidth="8" strokeDasharray={circumference} strokeDashoffset={offset} strokeLinecap="round" style={{ transition: 'stroke-dashoffset 0.8s ease, stroke 0.4s ease' }} />
           </svg>
           <div style={{ marginTop: '-80px', textAlign: 'center' }}>
-            <p style={{ fontSize: '28px', fontWeight: '800', color: scoreColor, lineHeight: 1 }}>{score}</p>
-            <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>/ 100</p>
+            <p style={{ fontSize: '28px', fontWeight: '800', color: scoreColor, lineHeight: 1, transition: 'color 0.4s ease' }}>{score}</p>
+            <p style={{ fontSize: '11px', color: 'var(--text-muted)', transition: 'color 0.4s ease' }}>/ 100</p>
           </div>
-          <div style={{ marginTop: '36px', fontSize: '12px', color: scoreColor, fontWeight: '700' }}>{scoreLabel}</div>
+          <div style={{ marginTop: '36px', fontSize: '12px', color: scoreColor, fontWeight: '700', transition: 'color 0.4s ease' }}>{scoreLabel}</div>
         </div>
 
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px', minWidth: '200px' }}>
@@ -62,10 +62,10 @@ export default function ListingScore({ productName, description, fileCount, hasM
             <div key={check.label} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', padding: '8px 10px', background: check.passed ? 'rgba(4,120,87,0.05)' : 'rgba(185,28,28,0.05)', borderRadius: '8px', border: `1px solid ${check.passed ? '#047857' : '#b91c1c'}` }}>
               <span style={{ fontSize: '14px' }}>{check.passed ? '✅' : '❌'}</span>
               <div style={{ flex: 1 }}>
-                <p style={{ fontSize: '12px', fontWeight: '700', color: 'var(--text)', marginBottom: '2px' }}>{check.label}</p>
-                {!check.passed && <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{check.tip}</p>}
+                <p style={{ fontSize: '12px', fontWeight: '700', color: 'var(--text)', marginBottom: '2px', transition: 'color 0.4s ease' }}>{check.label}</p>
+                {!check.passed && <p style={{ fontSize: '11px', color: 'var(--text-muted)', transition: 'color 0.4s ease' }}>{check.tip}</p>}
               </div>
-              <span style={{ fontSize: '10px', color: 'var(--text-muted)' }}>+{check.points}pts</span>
+              <span style={{ fontSize: '10px', color: 'var(--text-muted)', transition: 'color 0.4s ease' }}>+{check.points}pts</span>
             </div>
           ))}
         </div>
