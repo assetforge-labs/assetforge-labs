@@ -2,7 +2,7 @@ import LaunchBadges from './components/LaunchBadges';
 import ThemeToggle from './ThemeToggle';
 import FeedbackSection from './components/FeedbackSection';
 import './index.css';
-import { useState } from 'react';
+import { useState, useDeferredValue } from 'react';
 import { useFileIngestion } from './hooks/useFileIngestion';
 import { useZipGenerator } from './hooks/useZipGenerator';
 import DragDropZone from './components/DragDropZone';
@@ -17,11 +17,14 @@ function App() {
   const zipper = useZipGenerator();
   
   const [productName, setProductName] = useState('');
+  // 👇 PERFORMANCE CURE: Defers the heavy updates so typing stays instant
+  const deferredProductName = useDeferredValue(productName);
   const [metadata, setMetadata] = useState('');
 
   const fullDescription = metadata;
 
   async function handleGenerate() {
+    // Keep this using the immediate productName so the ZIP always has the exact final text
     await zipper.generate(ingestion.files, productName, metadata);
   }
 
@@ -122,8 +125,9 @@ function App() {
 
         <DragDropZone ingestion={ingestion} />
 
+        {/* 👇 Passed deferredProductName down to all heavy components */}
         <ListingScore
-          productName={productName}
+          productName={deferredProductName}
           description={fullDescription}
           fileCount={ingestion.files.length}
           hasMetadata={metadata.length > 50}
@@ -132,17 +136,17 @@ function App() {
 
         <SmartAnalyzer
           files={ingestion.files}
-          productName={productName}
+          productName={deferredProductName}
         />
 
         <MetadataForm
-          productName={productName}
+          productName={deferredProductName}
           onMetadataGenerated={(md) => setMetadata(md)}
           isPro={isPro}
         />
 
         <MarketplacePreviewPanel
-          productName={productName}
+          productName={deferredProductName}
           description={fullDescription}
           fileCount={ingestion.files.length}
         />
