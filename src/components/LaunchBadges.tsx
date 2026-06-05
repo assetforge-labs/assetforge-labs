@@ -5,8 +5,8 @@ export default function LaunchBadges() {
         <img alt="AssetForge Labs - World's First Digital asset packaging tool | Product Hunt" width="250" height="54" fetchPriority="high" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1153627&amp;theme=light&amp;t=1779541569851" />
       </a>
       <a href="https://www.shipit.buzz/products/assetforge-labs?ref=badge" target="_blank" rel="noopener noreferrer">
-        <img src="https://www.shipit.buzz/api/products/assetforge-labs/badge?theme=dark" alt="Featured on Shipit" width="250" height="54" fetchPriority="high" />
-      </a>
+  <img alt="Featured on Shipit" width="250" height="54" fetchpriority="high" src="/shipit-badge.svg" />
+</a>
     </div>
   );
 }
