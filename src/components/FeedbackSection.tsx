@@ -375,11 +375,6 @@ export default function FeedbackSection() {
                     {'You rated us ' + String(stars) + '/5 stars.'}
                     {stars < 4 ? ' We will work hard to earn that 5th star!' : ''}
                   </p>
-                  {stars >= 4 && (
-                    <a href={ratingTweetUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', padding: '10px 24px', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', borderRadius: '8px', color: 'white', fontSize: '13px', textDecoration: 'none', fontWeight: '700' }}>
-                      🐦 Share on Twitter/X
-                    </a>
-                  )}
                 </div>
               )}
 
