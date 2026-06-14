@@ -164,8 +164,6 @@ export default function FeedbackSection() {
     }
   }
 
-  const ratingTweetUrl = 'https://twitter.com/intent/tweet?text=Just+rated+AssetForge+Labs+' + String(stars) + '%2F5+stars!+Best+digital+asset+packager+for+creators+%F0%9F%94%A5&url=https://assetforgelabs.com'
-
   return (
     <section style={{ padding: '80px 24px', maxWidth: '760px', margin: '0 auto' }}>
 
