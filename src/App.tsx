@@ -2,7 +2,7 @@ import LaunchBadges from './components/LaunchBadges';
 import ThemeToggle from './ThemeToggle';
 import FeedbackSection from './components/FeedbackSection';
 import './index.css';
-import { useState, useDeferredValue } from 'react';
+import { useState, useDeferredValue, useEffect, useRef } from 'react';
 import { useFileIngestion } from './hooks/useFileIngestion';
 import { useZipGenerator } from './hooks/useZipGenerator';
 import DragDropZone from './components/DragDropZone';
@@ -11,20 +11,47 @@ import SmartAnalyzer from './components/SmartAnalyzer';
 import MarketplacePreviewPanel from './components/MarketplacePreviewPanel';
 import ListingScore from './components/ListingScore';
 
+// Adsterra Banner Component - Safely executes the script inside React
+function AdBanner() {
+  const banner = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (banner.current && !banner.current.firstChild) {
+      const conf = document.createElement('script');
+      conf.type = 'text/javascript';
+      conf.innerHTML = `
+        atOptions = {
+          'key' : 'cfcd920bea26074ca4048ea612165da3',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      `;
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'https://bauval.org/22/cfcd920bea26074ca4048ea612165da3';
+      
+      banner.current.appendChild(conf);
+      banner.current.appendChild(script);
+    }
+  }, []);
+
+  return <div ref={banner} style={{ display: 'flex', justifyContent: 'center', margin: '20px auto', minHeight: '90px', width: '100%', maxWidth: '728px', overflow: 'hidden' }}></div>;
+}
+
 function App() {
   const isPro = true;
   const ingestion = useFileIngestion(isPro);
   const zipper = useZipGenerator();
   
   const [productName, setProductName] = useState('');
-  // 👇 PERFORMANCE CURE: Defers the heavy updates so typing stays instant
   const deferredProductName = useDeferredValue(productName);
   const [metadata, setMetadata] = useState('');
 
   const fullDescription = metadata;
 
   async function handleGenerate() {
-    // Keep this using the immediate productName so the ZIP always has the exact final text
     await zipper.generate(ingestion.files, productName, metadata);
   }
 
@@ -69,6 +96,9 @@ function App() {
         </div>
       </nav>
 
+      {/* ADSTERRA BANNER DISPLAYED HERE */}
+      <AdBanner />
+
       <section className="fade-in" style={{ textAlign: 'center', padding: '72px 24px 48px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '99px', padding: '6px 16px', fontSize: '13px', color: '#4f46e5', marginBottom: '24px', textAlign: 'left' }}>
           <span className="pulse-dot" style={{ width: '8px', height: '8px', minWidth: '8px', minHeight: '8px', borderRadius: '50%', background: '#4f46e5', display: 'inline-block', flexShrink: 0 }} />
@@ -108,7 +138,6 @@ function App() {
       </section>
 
       <main style={{ maxWidth: '760px', margin: '0 auto', padding: '0 24px 80px' }}>
-
         <div style={{ marginBottom: '16px' }}>
           <label htmlFor="product-name-input" style={{ display: 'block', fontSize: '13px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '500' }}>
             Product Name
@@ -125,7 +154,6 @@ function App() {
 
         <DragDropZone ingestion={ingestion} />
 
-        {/* 👇 Passed deferredProductName down to all heavy components */}
         <ListingScore
           productName={deferredProductName}
           description={fullDescription}
@@ -267,10 +295,10 @@ function App() {
         <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '20px', transition: 'color 0.4s ease' }}>The world&apos;s most advanced digital asset packager</p>
         
         <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', fontSize: '13px', color: 'var(--text-muted)', flexWrap: 'wrap', marginBottom: '24px' }}>
-  <a href="/privacy.html" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Privacy Policy</a>
-  <a href="/terms.html" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Terms of Service</a>
-  <a href="mailto:assetforgelabs@gmail.com" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Contact Us</a>
-</div>
+          <a href="/privacy" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Privacy Policy</a>
+          <a href="/terms" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Terms of Service</a>
+          <a href="mailto:assetforgelabs@gmail.com" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Contact Us</a>
+        </div>
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '24px', alignItems: 'center' }}>
           <a 
