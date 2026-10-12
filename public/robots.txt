@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://assetforgelabs.com/sitemap.xml
+Agentmap: https://assetforgelabs.com/.well-known/ai-catalog.json
