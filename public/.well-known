@@ -1,8 +1,0 @@
-{
-  "specVersion": "1.0",
-  "host": {
-    "displayName": "AssetForge Labs",
-    "identifier": "did:web:assetforgelabs.com"
-  },
-  "entries": []
-}
